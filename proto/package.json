@@ -1,0 +1,10 @@
+{
+  "name": "depcop-proto-sample",
+  "private": true,
+  "dependencies": {
+    "a": "",
+    "b": "",
+    "c": ""
+  }
+}
+
