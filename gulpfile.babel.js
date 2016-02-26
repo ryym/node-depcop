@@ -65,7 +65,7 @@ gulp.task('lint:lib', () => {
 });
 
 gulp.task('lint:test', () => {
-  lintFiles([GLOB.spec, GLOB.example], true);
+  lintFiles([GLOB.spec], true);
 });
 
 gulp.task('lint:bin', () => {
