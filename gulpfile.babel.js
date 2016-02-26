@@ -172,6 +172,11 @@ function lintFiles(pattern, strict, configs) {
   const report = linter.executeOnFiles(pattern);
   const formatter = linter.getFormatter();
   console.log(formatter(report.results));
+
+  if (lintFiles.fixEnabled) {
+    eslint.CLIEngine.outputFixes(report);
+  }
+
   if (report.errorCount > 0 || (strict && report.warningCount > 0)) {
     throw new Error('eslint reports some problems.');
   }
