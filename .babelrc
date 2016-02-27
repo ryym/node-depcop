@@ -7,6 +7,5 @@
     ["module-alias", [
       { "src": "./lib", "expose": "$lib" }
     ]]
-  ],
-  "ignore": "./build/**/*.js"
+  ]
 }
