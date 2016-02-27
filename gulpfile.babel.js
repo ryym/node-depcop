@@ -61,19 +61,19 @@ gulp.task('test:watch', ['test:prepare'], () => {
 });
 
 gulp.task('lint:lib', () => {
-  lintFiles([GLOB.lib], true);
+  lintFiles([GLOB.lib]);
 });
 
 gulp.task('lint:test', () => {
-  lintFiles([GLOB.spec], true);
+  lintFiles([GLOB.spec]);
 });
 
 gulp.task('lint:bin', () => {
-  lintFiles([GLOB.bin], true);
+  lintFiles([GLOB.bin]);
 });
 
 gulp.task('lint:gulp', () => {
-  lintFiles(['./gulpfile.babel.js'], true, {
+  lintFiles(['./gulpfile.babel.js'], {
     rules: { 'no-console': 0 }
   });
 });
@@ -100,6 +100,10 @@ gulp.task('_lint:enableFix', () => {
   ]);
 });
 
+gulp.task('_lint:disallowWarns', () => {
+  lintFiles.disallowWarns = true;
+});
+
 gulp.task('lint', [
   'lint:lib',
   'lint:test',
@@ -114,6 +118,11 @@ gulp.task('lint:all', [
 gulp.task('check', [
   'lint:all',
   'test'
+]);
+
+gulp.task('check:strict', [
+  '_lint:disallowWarns',
+  'check'
 ]);
 
 gulp.task('default', [
@@ -165,7 +174,7 @@ function runAndWatch(watchPattern, initialValue, task) {
 /**
  * Lint the specified files using eslint.
  */
-function lintFiles(pattern, strict, configs) {
+function lintFiles(pattern, configs) {
   const linter = new eslint.CLIEngine(
     Object.assign({ fix: lintFiles.fixEnabled }, configs)
   );
@@ -177,8 +186,10 @@ function lintFiles(pattern, strict, configs) {
     eslint.CLIEngine.outputFixes(report);
   }
 
+  const strict = lintFiles.disallowWarns;
   if (report.errorCount > 0 || (strict && report.warningCount > 0)) {
     throw new Error('eslint reports some problems.');
   }
 }
+lintFiles.disallowWarns = false;
 lintFiles.fixEnabled = false;

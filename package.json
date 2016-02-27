@@ -6,10 +6,11 @@
     "build": "gulp build",
     "dev": "gulp",
     "test": "gulp check",
+    "test:strict": "gulp check:strict",
     "coverage": "nyc gulp test",
     "precoveralls": "npm run coverage",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "preversion": "npm test && npm run build"
+    "preversion": "npm run test:strict && npm run build"
   },
   "keywords": [
     "package.json",
