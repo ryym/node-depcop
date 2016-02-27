@@ -10,7 +10,7 @@ const GLOB = {
   bin: './bin/**/*',
   lib: './lib/**/*.js',
   build: './build/**/*',
-  spec: './test/lib/**/*.spec.js'
+  spec: './test/**/*.spec.js'
 };
 
 // -----------------------------------------------
