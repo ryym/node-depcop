@@ -30,7 +30,7 @@ gulp.task('build', ['clean'], () => {
 gulp.task('watch', ['clean'], () => {
   runAndWatch(GLOB.lib, GLOB.lib, path => {
     gutil.log(gutil.colors.cyan('babel:'), path);
-    gulp.src(path)
+    gulp.src(path, { base: './lib' })
       .pipe(babel())
       .on('error', ex => console.log(ex.stack))
       .pipe(gulp.dest('build/'));
