@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+'use strict';
+
+if (process.argv.length < 3 || process.argv.length > 4) {
+  console.log(
+    'Usage: depcop [lib-source-pattern] [dev-source-pattern]'
+  );
+  return;
+}
+
+var makeDepcop = require('../build')();
+
+var libSources = process.argv[2];
+var devSources = process.argv[3];
+
+var depcop = makeDepcop({
+  libSources: libSources,
+  devSources: devSources
+});
+
+var report = depcop.generateReport();
+var format = depcop.getFormatter();
+
+console.log(format(report));
