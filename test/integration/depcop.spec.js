@@ -64,5 +64,27 @@ describe('depcop', () => {
 
   it('detects modules which is listed in dependencies but never used');
 
-  it('detects modules which belongs to the wrong group');
+  it('detects modules which belongs to the wrong group', () => {
+    const results = _makeDepcop('strayed').generateReport();
+    assertReported(results[0], {
+      dependencies: {
+        'lib_used-in-dev': [
+          at('dev/a.js'),
+          at('dev/sub/b.js')
+        ]
+      },
+      devDependencies: {
+        'dev_used-in-lib': [
+          at('lib/a.js'),
+          at('lib/sub/b.js')
+        ],
+        'dev_used-in-both': [
+          at('lib/a.js'),
+          at('lib/sub/b.js'),
+          at('dev/a.js'),
+          at('dev/sub/b.js')
+        ]
+      }
+    });
+  });
 });
