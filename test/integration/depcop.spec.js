@@ -8,7 +8,8 @@ const makeDepcop = configureDepcop(__dirname);
 function _makeDepcop(...checks) {
   return makeDepcop({
     checks,
-    libSources: `${FIXTURES_PATH}/lib/**/*.js`
+    libSources: `${FIXTURES_PATH}/lib/**/*.js`,
+    devSources: `${FIXTURES_PATH}/dev/**/*.js`
   });
 }
 
@@ -27,7 +28,9 @@ function format(modules) {
 }
 
 function assertReported(reports, expectedReports) {
-  assert.deepEqual(reports.modules, format(expectedReports));
+  const dependencies = format(expectedReports.dependencies);
+  const devDependencies = format(expectedReports.devDependencies);
+  assert.deepEqual(reports.modules, { dependencies, devDependencies });
 }
 
 /**
@@ -37,15 +40,25 @@ describe('depcop', () => {
   it('detects modules which is used but unlisted in dependencies', () => {
     const results = _makeDepcop('unlisted').generateReport();
 
-    assertReported(results.unlisted, {
-      'ul_used-in-lib': [
-        at('lib/a.js'),
-        at('lib/sub/b.js')
-      ],
-      'ul_used-in-both': [
-        at('lib/a.js'),
-        at('lib/sub/b.js')
-      ]
+    assertReported(results[0], {
+      dependencies: {
+        'ul_used-in-lib': [
+          at('lib/a.js'),
+          at('lib/sub/b.js')
+        ],
+        'ul_used-in-both': [
+          at('lib/a.js'),
+          at('lib/sub/b.js'),
+          at('dev/a.js'),
+          at('dev/sub/b.js')
+        ]
+      },
+      devDependencies: {
+        'ul_used-in-dev': [
+          at('dev/a.js'),
+          at('dev/sub/b.js')
+        ]
+      }
     });
   });
 
