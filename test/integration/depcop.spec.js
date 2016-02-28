@@ -62,8 +62,6 @@ describe('depcop', () => {
     });
   });
 
-  it('detects modules which is listed in dependencies but never used');
-
   it('detects modules which belongs to the wrong group', () => {
     const results = _makeDepcop('strayed').generateReport();
     assertReported(results[0], {
@@ -87,4 +85,21 @@ describe('depcop', () => {
       }
     });
   });
+
+  it('detects modules which is listed in dependencies but never used', () => {
+    const results = _makeDepcop('unused').generateReport();
+    assertReported(results[0], {
+      dependencies: {
+        'lib_unused': [
+          at('../package.json')
+        ]
+      },
+      devDependencies: {
+        'dev_unused': [
+          at('../package.json')
+        ]
+      }
+    });
+  });
+
 });
