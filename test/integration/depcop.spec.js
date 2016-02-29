@@ -5,7 +5,7 @@ import configureDepcop from '$lib';
 const FIXTURES_PATH = path.resolve(__dirname, './fixtures');
 const makeDepcop = configureDepcop(__dirname);
 
-function _makeDepcop(...checks) {
+function _makeDepcop(checks) {
   return makeDepcop({
     checks,
     libSources: [`${FIXTURES_PATH}/lib/**/*.js`],
@@ -38,7 +38,7 @@ function assertReported(reports, expectedReports) {
  */
 describe('depcop', () => {
   it('detects modules which is used but unlisted in dependencies', () => {
-    const results = _makeDepcop('missing').generateReport();
+    const results = _makeDepcop({ missing: {} }).generateReport();
 
     assertReported(results[0], {
       dependencies: {
@@ -63,7 +63,7 @@ describe('depcop', () => {
   });
 
   it('detects modules which belongs to the wrong group', () => {
-    const results = _makeDepcop('strayed').generateReport();
+    const results = _makeDepcop({ strayed: {} }).generateReport();
     assertReported(results[0], {
       dependencies: {
         'lib_used-in-dev': [
@@ -87,7 +87,8 @@ describe('depcop', () => {
   });
 
   it('detects modules which is listed in dependencies but never used', () => {
-    const results = _makeDepcop('unused').generateReport();
+    const results = _makeDepcop({ unused: {} }).generateReport();
+
     assertReported(results[0], {
       dependencies: {
         'lib_unused': [
