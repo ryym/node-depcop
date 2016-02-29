@@ -87,7 +87,9 @@ describe('depcop', () => {
   });
 
   it('detects modules which is listed in dependencies but never used', () => {
-    const results = _makeDepcop({ unused: {} }).generateReport();
+    const results = _makeDepcop({
+      unused: { ignore: ['-somewhere$'] }
+    }).generateReport();
 
     assertReported(results[0], {
       dependencies: {
