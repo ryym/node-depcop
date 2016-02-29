@@ -10,3 +10,6 @@ import child from './foo/bar/baz/child';
 import devUsedInLib from 'dev_used-in-lib';
 import devUsedInBoth from 'dev_used-in-both';
 import grandParent from '../../../grandParent';
+
+import specialFoo from '$special/foo';
+import specialBar from '$special/bar';
