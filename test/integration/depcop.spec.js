@@ -8,8 +8,8 @@ const makeDepcop = configureDepcop(__dirname);
 function _makeDepcop(...checks) {
   return makeDepcop({
     checks,
-    libSources: `${FIXTURES_PATH}/lib/**/*.js`,
-    devSources: `${FIXTURES_PATH}/dev/**/*.js`
+    libSources: [`${FIXTURES_PATH}/lib/**/*.js`],
+    devSources: [`${FIXTURES_PATH}/dev/**/*.js`]
   });
 }
 
