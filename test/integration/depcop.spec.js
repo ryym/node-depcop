@@ -38,7 +38,7 @@ function assertReported(reports, expectedReports) {
  */
 describe('depcop', () => {
   it('detects modules which is used but unlisted in dependencies', () => {
-    const results = _makeDepcop('unlisted').generateReport();
+    const results = _makeDepcop('missing').generateReport();
 
     assertReported(results[0], {
       dependencies: {
