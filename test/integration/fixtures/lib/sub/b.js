@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import ulUsedInLib from 'ul_used-in-lib';
 import ulUsedInBoth from 'ul_used-in-both';
 import someFile from './someFile';

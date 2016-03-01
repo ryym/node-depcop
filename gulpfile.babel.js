@@ -10,6 +10,7 @@ const GLOB = {
   bin: './bin/**/*',
   lib: './lib/**/*.js',
   build: './build/**/*',
+  test: './test/**/*.js',
   spec: './test/**/*.spec.js'
 };
 
@@ -65,7 +66,7 @@ gulp.task('lint:lib', () => {
 });
 
 gulp.task('lint:test', () => {
-  lintFiles([GLOB.spec]);
+  lintFiles([GLOB.test]);
 });
 
 gulp.task('lint:bin', () => {
@@ -86,7 +87,7 @@ gulp.task('lint:watch', () => {
     console.log(formatter(report.results));
   }
   runAndWatch(GLOB.lib, GLOB.lib, lintAndReport);
-  runAndWatch(GLOB.spec, GLOB.spec, lintAndReport);
+  runAndWatch(GLOB.test, GLOB.test, lintAndReport);
 });
 
 gulp.task('_lint:enableFix', () => {
