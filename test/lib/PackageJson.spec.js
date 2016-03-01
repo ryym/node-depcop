@@ -1,12 +1,11 @@
 import assert from 'power-assert';
-import path from 'path';
 import PackageJson from '$lib/PackageJson';
+import { FIXTURES_PATH } from './helper';
 
-const FIXTURE_PATH = path.resolve(__dirname, './fixtures');
 
 /** @test {PackageJson} */
 describe('PackageJson', () => {
-  const packageJson = new PackageJson(FIXTURE_PATH);
+  const packageJson = new PackageJson(FIXTURES_PATH);
 
   it('loads nearest package.json', () => {
     assert.equal(
