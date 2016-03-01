@@ -1,0 +1,24 @@
+{
+  "name": "depcop-integration-test",
+  "private": true,
+  "missingDependencies": {
+    "ul_used-in-dev": "error",
+    "ul_used-in-lib": "error",
+    "ul_used-in-both": "error"
+  },
+  "dependencies": {
+    "lib_unused": "error",
+    "lib_used-in-dev": "error",
+    "lib_used-in-lib": "OK",
+    "lib_used-in-both": "OK",
+    "lib_used-somewhere": "ignored"
+  },
+  "devDependencies": {
+    "dev_unused": "error",
+    "dev_used-in-dev": "OK",
+    "dev_used-in-lib": "error",
+    "dev_used-in-both": "error",
+    "dev_used-somewhere": "ignored"
+  }
+}
+
