@@ -10,7 +10,7 @@ const MY_FIXTURES_PATH = path.join(FIXTURES_PATH, 'loadConfig');
 /** @test {loadConfig} */
 describe('loadConfig()', () => {
   it('loads configurations from the config file', () => {
-    const packageJson = new PackageJson(FIXTURES_PATH);
+    const packageJson = new PackageJson('foo/bar', {});
     const config = loadConfig(packageJson, MY_FIXTURES_PATH);
 
     assert.deepEqual(config, fixtureConfig);
@@ -18,8 +18,9 @@ describe('loadConfig()', () => {
 
   context('when package.json has configs', () => {
     it('loads configurations from package.json', () => {
-      const pkgDir = path.join(MY_FIXTURES_PATH, 'pkg');
-      const packageJson = new PackageJson(pkgDir);
+      const packageJson = new PackageJson('foo/bar', {
+        'depcop': { isPackageJson: true }
+      });
       const config = loadConfig(packageJson, MY_FIXTURES_PATH);
 
       assert(config.isPackageJson);
