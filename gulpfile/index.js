@@ -92,22 +92,23 @@ gulp.task('test:prepare', () => {
 // Lint tasks
 // -----------------------------------------------
 
-gulp.task('lint:lib', () => {
-  $.lintFiles([$.GLOB.lib]);
-});
+[
+  'bin', 'lib', 'test', 'gulp'
+]
+.forEach(target => {
+  const lintTaskName = `lint:${target}`;
 
-gulp.task('lint:test', () => {
-  $.lintFiles([$.GLOB.test]);
-});
-
-gulp.task('lint:bin', () => {
-  $.lintFiles([$.GLOB.bin]);
-});
-
-gulp.task('lint:gulp', () => {
-  $.lintFiles([$.GLOB.gulp], {
-    rules: { 'no-console': 0 }
+  // Define a lint task.
+  gulp.task(lintTaskName, () => {
+    const globPattern = $.GLOB[target];
+    $.lintFiles([globPattern]);
   });
+
+  // Define a lint task which uses autofix feature.
+  gulp.task(`${lintTaskName}:fix`, [
+    '_lint:enableFix',
+    lintTaskName
+  ]);
 });
 
 gulp.task('lint:watch', () => {
@@ -120,13 +121,6 @@ gulp.task('lint:watch', () => {
 
   $.runAndWatch($.GLOB.lib, $.GLOB.lib, lintAndReport);
   $.runAndWatch($.GLOB.test, $.GLOB.test, lintAndReport);
-});
-
-['lib', 'test', 'bin', 'gulp'].forEach(target => {
-  gulp.task(`lint:${target}:fix`, [
-    '_lint:enableFix',
-    `lint:${target}`
-  ]);
 });
 
 gulp.task('_lint:enableFix', () => {
