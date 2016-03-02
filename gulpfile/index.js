@@ -11,6 +11,7 @@ import * as $ from './helper';
 // -----------------------------------------------
 
 gulp.task('default', [
+  'watch',
   'lint:watch',
   'test:watch'
 ]);
@@ -64,13 +65,13 @@ gulp.task('watch', ['clean'], () => {
 // Test tasks
 // -----------------------------------------------
 
-gulp.task('test', ['test:prepare'], done => {
+gulp.task('test', ['build', 'test:prepare'], done => {
   $.runTests($.GLOB.spec).then(err => {
     done(err ? new Error('Mocha tests failed.') : undefined);
   }, done);
 });
 
-gulp.task('test:watch', ['test:prepare'], () => {
+gulp.task('test:watch', ['build', 'test:prepare'], () => {
   function test() {
     $.runTests($.GLOB.spec, { reporter: 'dot' })
       .catch(ex => console.log(ex.stack));
