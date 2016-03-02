@@ -11,7 +11,6 @@ import * as $ from './helper';
 // -----------------------------------------------
 
 gulp.task('default', [
-  'watch',
   'lint:watch',
   'test:watch'
 ]);
@@ -71,11 +70,16 @@ gulp.task('test', ['build', 'test:prepare'], done => {
   }, done);
 });
 
-gulp.task('test:watch', ['build', 'test:prepare'], () => {
+gulp.task('test:watch', ['test:prepare'], () => {
   function test() {
-    $.runTests($.GLOB.spec, { reporter: 'dot' })
-      .catch(ex => console.log(ex.stack));
+    $.runTests(
+      $.GLOB.spec,
+      { reporter: 'dot' },
+      { ignore: '**/bin/*.js' }
+    )
+    .catch(ex => console.log(ex.stack));
   }
+
   const sourceFiles = glob.sync($.GLOB.lib, {
     realpath: true
   });

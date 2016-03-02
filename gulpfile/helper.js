@@ -37,11 +37,14 @@ export function clearModuleCache(path) {
  * Run tests in the specified file pattern using Mocha.
  * @param {string} pattern
  * @param {Object} options - The options for Mocha.
+ * @param {Object} globOptions - The options for glob.
  * @return {Promise} Rejected if any runtime error occurred.
  */
-export function runTests(pattern, options) {
+export function runTests(pattern, options, globOptions) {
   const mocha = new Mocha(options);
-  const files = glob.sync(pattern, { realpath: true });
+  const files = glob.sync(pattern, Object.assign(
+    { realpath: true }, globOptions
+  ));
 
   files.forEach(file => {
     clearModuleCache(file);  // For watching
