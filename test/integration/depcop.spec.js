@@ -1,16 +1,12 @@
 import assert from 'power-assert';
 import path from 'path';
-import configureDepcop from '$lib';
-
-const FIXTURES_PATH = path.resolve(__dirname, './fixtures');
-const makeDepcop = configureDepcop(FIXTURES_PATH);
+import {
+  FIXTURES_PATH,
+  makeDepcop
+} from './helper';
 
 function _makeDepcop(checks) {
-  return makeDepcop({
-    checks,
-    libSources: [`${FIXTURES_PATH}/lib/**/*.js`],
-    devSources: [`${FIXTURES_PATH}/dev/**/*.js`]
-  });
+  return makeDepcop({ checks }, true);
 }
 
 function at(fileName) {
