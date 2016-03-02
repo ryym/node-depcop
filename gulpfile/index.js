@@ -76,12 +76,23 @@ gulp.task('test:watch', ['build', 'test:prepare'], () => {
     $.runTests($.GLOB.spec, { reporter: 'dot' })
       .catch(ex => console.log(ex.stack));
   }
-  const sourceFiles = glob.sync($.GLOB.lib, { realpath: true });
+  const sourceFiles = glob.sync($.GLOB.lib, {
+    realpath: true
+  });
+  const helperFiles = glob.sync($.GLOB.test, {
+    realpath: true,
+    ignore: '**/*.spec.js'
+  });
 
-  gulp.watch($.GLOB.lib, () => {
+  gulp.watch([$.GLOB.lib, $.GLOB.test], event => {
+    if (event.path.endsWith('.spec.js')) {
+      return;
+    }
     sourceFiles.forEach(f => $.clearModuleCache(f));
+    helperFiles.forEach(f => $.clearModuleCache(f));
     test();
   });
+
   $.runAndWatch($.GLOB.spec, null, () => test());
 });
 
