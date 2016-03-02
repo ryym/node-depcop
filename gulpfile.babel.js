@@ -6,12 +6,18 @@ import glob from 'glob';
 import Mocha from 'mocha';
 import eslint from 'eslint';
 
+const PATH = {
+  lib: './lib',
+  build: './build',
+  test: './test'
+};
+
 const GLOB = {
   bin: './bin/**/*',
-  lib: './lib/**/*.js',
-  build: './build/**/*',
-  test: './test/**/*.js',
-  spec: './test/**/*.spec.js'
+  lib: `${PATH.lib}/**/*.js`,
+  build: `${PATH.build}/**/*`,
+  test: `${PATH.test}/**/*.js`,
+  spec: `${PATH.test}/**/*.spec.js`
 };
 
 // -----------------------------------------------
@@ -25,16 +31,16 @@ gulp.task('clean', done => {
 gulp.task('build', ['clean'], () => {
   return gulp.src(GLOB.lib)
     .pipe(babel())
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest(PATH.build));
 });
 
 gulp.task('watch', ['clean'], () => {
   runAndWatch(GLOB.lib, GLOB.lib, path => {
     gutil.log(gutil.colors.cyan('babel:'), path);
-    gulp.src(path, { base: './lib' })
+    gulp.src(path, { base: PATH.lib })
       .pipe(babel())
       .on('error', ex => console.log(ex.stack))
-      .pipe(gulp.dest('build/'));
+      .pipe(gulp.dest(PATH.build));
   });
 });
 
@@ -74,7 +80,7 @@ gulp.task('lint:bin', () => {
 });
 
 gulp.task('lint:gulp', () => {
-  lintFiles(['./gulpfile.babel.js'], {
+  lintFiles([__filename], {
     rules: { 'no-console': 0 }
   });
 });
