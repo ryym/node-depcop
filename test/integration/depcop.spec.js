@@ -3,7 +3,7 @@ import path from 'path';
 import configureDepcop from '$lib';
 
 const FIXTURES_PATH = path.resolve(__dirname, './fixtures');
-const makeDepcop = configureDepcop(__dirname);
+const makeDepcop = configureDepcop(FIXTURES_PATH);
 
 function _makeDepcop(checks) {
   return makeDepcop({
@@ -93,16 +93,17 @@ describe('depcop', () => {
     const results = _makeDepcop({
       unused: { ignore: ['-somewhere$'] }
     }).generateReport();
+    const pkgPath = path.join(FIXTURES_PATH, 'package.json');
 
     assertReported(results[0], {
       dependencies: {
         'lib_unused': [
-          at('../package.json')
+          at(pkgPath)
         ]
       },
       devDependencies: {
         'dev_unused': [
-          at('../package.json')
+          at(pkgPath)
         ]
       }
     });
