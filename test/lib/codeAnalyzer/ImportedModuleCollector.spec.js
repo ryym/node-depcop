@@ -43,6 +43,15 @@ describe('ImportedModuleCollector', () => {
         import _baz from 'baz';
       `,
       modules: ['foo', 'bar', 'baz']
+    }],
+    ['ignores modules in subdirectories', {
+      code: `
+        import foo from 'foo';
+        import bar from 'bar/sub/a';
+        import bar from 'bar/sub/b';
+        import baz from 'baz/inner/SomeClass';
+      `,
+      modules: ['foo', 'bar', 'baz']
     }]
   ])
   .it('collects module information (%s)', (_, data) => {
