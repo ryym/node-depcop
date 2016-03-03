@@ -4,6 +4,8 @@ import babel from 'gulp-babel';
 import rimraf from 'rimraf';
 import glob from 'glob';
 import eslint from 'eslint';
+import ESDoc from 'esdoc/out/src/ESDoc';
+import ESDocPublisher from 'esdoc/out/src/Publisher/publish';
 import * as $ from './helper';
 
 // -----------------------------------------------
@@ -147,3 +149,11 @@ gulp.task('_lint:disallowWarns', () => {
   $.lintFiles.disallowWarns = true;
 });
 
+// -----------------------------------------------
+// Document tasks
+// -----------------------------------------------
+
+gulp.task('doc', () => {
+  const config = require('../esdoc.json');
+  ESDoc.generate(config, ESDocPublisher);
+});

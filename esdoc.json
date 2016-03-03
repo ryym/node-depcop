@@ -1,0 +1,9 @@
+{
+  "source": "./lib",
+  "destination": "./esdoc",
+  "test": {
+    "type": "mocha",
+    "source": "./test"
+  },
+  "unexportIdentifier": false
+}
