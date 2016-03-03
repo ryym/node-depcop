@@ -33,7 +33,7 @@ function assertReported(reports, expectedReports) {
  * Depcop integration test.
  */
 describe('depcop', () => {
-  it('detects modules which is used but unlisted in dependencies', () => {
+  it('detects modules which are used but unlisted in dependencies', () => {
     const results = _makeDepcop({
       missing: { ignore: ['\\$special'] }
     }).generateReport();
@@ -85,7 +85,7 @@ describe('depcop', () => {
     });
   });
 
-  it('detects modules which is listed in dependencies but never used', () => {
+  it('detects modules which are listed in dependencies but never used', () => {
     const results = _makeDepcop({
       unused: { ignore: ['-somewhere$'] }
     }).generateReport();
