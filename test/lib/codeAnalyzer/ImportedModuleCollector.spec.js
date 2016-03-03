@@ -31,9 +31,21 @@ describe('ImportedModuleCollector', () => {
         import quux from '../../../quux';
       `,
       modules: ['foo']
+    }],
+    ['ignores builtin modules (e.g. fs, path)', {
+      code: `
+        import fs from 'fs';
+        import _foo from 'foo';
+        import path from 'path';
+        import crypto from 'crypto';
+        import _bar from 'bar';
+        import assert from 'assert';
+        import _baz from 'baz';
+      `,
+      modules: ['foo', 'bar', 'baz']
     }]
   ])
-  .it('collects module information: %s', (_, data) => {
+  .it('collects module information (%s)', (_, data) => {
     collector.searchImports(data.code, FileInfo.asAnonymous());
     const modules = collector.collectImportedModules();
 
@@ -79,4 +91,5 @@ describe('ImportedModuleCollector', () => {
       module3: ['b.js', 'c.js']
     });
   });
+
 });
