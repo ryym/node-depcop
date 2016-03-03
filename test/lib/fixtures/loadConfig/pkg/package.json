@@ -1,0 +1,7 @@
+{
+  "name": "depcop-fixtures-load-config",
+  "private": true,
+  "depcop": {
+    "isPackageJson": true
+  }
+}

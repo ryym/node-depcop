@@ -1,18 +1,38 @@
 import assert from 'power-assert';
-import path from 'path';
 import PackageJson from '$lib/PackageJson';
-
-const FIXTURE_PATH = path.resolve(__dirname, './fixtures');
 
 /** @test {PackageJson} */
 describe('PackageJson', () => {
-  const packageJson = new PackageJson(FIXTURE_PATH);
+  const packageJson = new PackageJson(
+    'path/of/the/package.json',
+    {
+      'name': 'package-json-name',
+      'dependencies': {
+        'foo': '1.0.0'
+      },
+      'devDependencies': {
+        'dev-foo': '1.0.0'
+      }
+    }
+  );
 
-  it('loads nearest package.json', () => {
-    assert.equal(
-      packageJson.get('name'),
-      'depcop-unit-test-fixture'
-    );
+  /** @test {PackageJson#get} */
+  describe('#get()', () => {
+    it('returns the value of the specified key', () => {
+      assert.equal(
+        packageJson.get('name'),
+        'package-json-name'
+      );
+    });
+
+    context('when the specified key is not found', () => {
+      it('returns the default value specified as a second argument', () => {
+        assert.equal(
+          packageJson.get('nothing', 'default-value'),
+          'default-value'
+        );
+      });
+    });
   });
 
   /** @test {PackageJson#hasDep} */
@@ -31,6 +51,16 @@ describe('PackageJson', () => {
       assert.deepEqual(
         [packageJson.hasDevDep('dev-foo'), packageJson.hasDevDep('unknown')],
         [true, false]
+      );
+    });
+  });
+
+  /** @test {PackageJson#getFileInfo} */
+  describe('#getFileInfo()', () => {
+    it('returns FileInfo instance about package.json', () => {
+      assert.deepEqual(
+        packageJson.getFileInfo().getPath(),
+        'path/of/the/package.json'
       );
     });
   });
