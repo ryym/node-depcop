@@ -15,12 +15,23 @@ describe('ImportedModuleCollector', () => {
   });
 
   forEach([
-    ['recognizes \'import\'s', {
+    ['recognizes various \'import\'s', {
       code: `
         import foo from 'foo';
-        import bar from 'bar';
+        import * as bar from 'bar';
+        import { member } from 'module1';
+        import { ronald as ron } from 'module2';
+        import { a, b, c as C } from 'module3';
+        import almost, { member } from 'module4';
+        import a, * as b from 'module5';
+        import 'module6';
       `,
-      modules: ['foo', 'bar']
+      modules: [
+        'foo', 'bar',
+        'module1', 'module2',
+        'module3', 'module4',
+        'module5', 'module6'
+      ]
     }],
     ['ignores relative paths', {
       code: `
