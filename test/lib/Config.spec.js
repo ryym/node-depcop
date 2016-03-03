@@ -6,7 +6,7 @@ import { fixturePath } from './helper';
 describe('Config', () => {
 
   /** @test {Config#listAllTargetFiles} */
-  describe('Config#listAllTargetFiles()', () => {
+  describe('#listAllTargetFiles()', () => {
     it('lists all target file paths', () => {
       const config = new Config({
         checks: {},
