@@ -29,13 +29,13 @@ gulp.task('check', [
 
 gulp.task('lint:all', [
   'lint',
-  'lint:gulp'
+  'lint:gulp:fix'
 ]);
 
 gulp.task('lint', [
-  'lint:lib',
-  'lint:test',
-  'lint:bin'
+  'lint:lib:fix',
+  'lint:test:fix',
+  'lint:bin:fix'
 ]);
 
 // -----------------------------------------------
