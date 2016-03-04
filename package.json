@@ -6,10 +6,8 @@
   "scripts": {
     "build": "gulp build",
     "dev": "gulp",
-    "test": "gulp check",
-    "test:strict": "gulp check:strict",
-    "coverage": "nyc gulp test",
-    "precoveralls": "npm run coverage",
+    "test": "nyc gulp check",
+    "test:strict": "nyc gulp check:strict",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "preversion": "npm run test:strict && npm run build"
   },
