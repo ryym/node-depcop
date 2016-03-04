@@ -59,9 +59,9 @@
     "sinon": "^1.17.3"
   },
   "nyc": {
-    "exclude": [
-      "gulpfile.babel.js",
-      "test/**/*"
+    "include": [
+      "lib/**/*",
+      "bin/*"
     ]
   }
 }
