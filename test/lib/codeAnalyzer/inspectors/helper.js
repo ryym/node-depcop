@@ -77,17 +77,12 @@ function arrayToObj(array, value) {
 function makeReporter() {
   const report = { dep: [], devDep: [] };
   return {
-    onDep(module) {
-      report.dep.push(module.getName());
+    onDep(moduleName) {
+      report.dep.push(moduleName);
     },
 
-    onDevDep(module) {
-      report.devDep.push(module.getName());
-    },
-
-    onPackageJson(group, name) {
-      group = (group === 'dependencies') ? 'dep' : 'devDep';
-      report[group].push(name);
+    onDevDep(moduleName) {
+      report.devDep.push(moduleName);
     },
 
     toObject() {
