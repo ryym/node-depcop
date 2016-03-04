@@ -77,11 +77,11 @@ function arrayToObj(array, value) {
 function makeReporter() {
   const report = { dep: [], devDep: [] };
   return {
-    onDep(moduleName) {
+    addDep(moduleName) {
       report.dep.push(moduleName);
     },
 
-    onDevDep(moduleName) {
+    addDevDep(moduleName) {
       report.devDep.push(moduleName);
     },
 
