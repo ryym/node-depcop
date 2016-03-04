@@ -58,7 +58,7 @@ describe('findMissingModules()', () => {
     },
     {
       title: `reports as missing dependency if the module
-      is used in lib code`,
+        is used in lib code`,
       modules: [
         module('lib-a', 'lib'),
         module('lib-b', 'lib'),
@@ -75,7 +75,7 @@ describe('findMissingModules()', () => {
     },
     {
       title: `reports as missing dev-dependency if the module
-      is used only in dev code`,
+        is used only in dev code`,
       modules: [
         module('lib-a', 'lib'),
         module('lib-b', 'lib'),
