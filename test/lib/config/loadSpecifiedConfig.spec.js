@@ -1,17 +1,17 @@
 import assert from 'power-assert';
 import path from 'path';
-import loadConfig from '$lib/loadConfig';
+import loadSpecifiedConfig from '$lib/config/loadSpecifiedConfig';
 import PackageJson from '$lib/PackageJson';
-import { FIXTURES_PATH } from './helper';
-import fixtureConfig from './fixtures/loadConfig/.depcoprc';
+import { FIXTURES_PATH } from '../helper';
+import fixtureConfig from '../fixtures/loadSpecifiedConfig/.depcoprc';
 
-const MY_FIXTURES_PATH = path.join(FIXTURES_PATH, 'loadConfig');
+const MY_FIXTURES_PATH = path.join(FIXTURES_PATH, 'loadSpecifiedConfig');
 
-/** @test {loadConfig} */
-describe('loadConfig()', () => {
+/** @test {loadSpecifiedConfig} */
+describe('loadSpecifiedConfig()', () => {
   it('loads configurations from the config file', () => {
     const packageJson = new PackageJson('foo/bar', {});
-    const config = loadConfig(packageJson, MY_FIXTURES_PATH);
+    const config = loadSpecifiedConfig(packageJson, MY_FIXTURES_PATH);
 
     assert.deepEqual(config, fixtureConfig);
   });
@@ -21,7 +21,7 @@ describe('loadConfig()', () => {
       const packageJson = new PackageJson('foo/bar', {
         'depcop': { isPackageJson: true }
       });
-      const config = loadConfig(packageJson, MY_FIXTURES_PATH);
+      const config = loadSpecifiedConfig(packageJson, MY_FIXTURES_PATH);
 
       assert(config.isPackageJson);
     });
