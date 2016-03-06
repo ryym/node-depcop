@@ -1,9 +1,10 @@
-import simpleFormatter from '$lib/formatters/simple';
+import simpleFormatter from '$lib/formatters/simpleFormatter';
 import {
   unindent, report, testFormatter
 } from './helper';
 
-describe('formatters/simple', () => {
+/** @test {simpleFormatter} */
+describe('simpleFormatter', () => {
   testFormatter(
     'creates a string to be displayed in console',
     simpleFormatter, [{
