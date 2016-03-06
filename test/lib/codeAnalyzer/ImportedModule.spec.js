@@ -3,8 +3,8 @@ import forEach from 'mocha-each';
 import ImportedModule from '$lib/codeAnalyzer/ImportedModule';
 import FileInfo from '$lib/FileInfo';
 
-function file(path, isLib = true) {
-  const type = FileInfo.Type[isLib ? 'LIB' : 'DEV'];
+function file(path, typeName) {
+  const type = FileInfo.Type[typeName.toUpperCase()];
   return new FileInfo(path, type);
 }
 
@@ -23,9 +23,9 @@ describe('ImportedModule', () => {
   describe('#getDependents()', () => {
     it('returns the array of dependent file infos', () => {
       const dependents = [
-        file('foo.js'),
-        file('foo/bar.js', false),
-        file('baz/.baz.js')
+        file('foo.js', 'lib'),
+        file('foo/bar.js', 'dev'),
+        file('baz/.baz.js', 'lib')
       ];
       const module = new ImportedModule('module-name', dependents);
       const gotDependents = module.getDependents();
@@ -40,11 +40,11 @@ describe('ImportedModule', () => {
   /** @test {ImportedModule#isUsedInLibSource} */
   describe('#isUsedInLibSource()', () => {
     forEach([[
-      [ file('a', true), file('b', true) ], true
+      [ file('a', 'lib'), file('b', 'lib') ], true
     ], [
-      [ file('a', true), file('b', false) ], true
+      [ file('a', 'lib'), file('b', 'dev') ], true
     ], [
-      [ file('a', false), file('b', false) ], false
+      [ file('a', 'dev'), file('b', 'dev') ], false
     ]])
     .it(
       'returns true if the module is used in lib code',
@@ -58,11 +58,11 @@ describe('ImportedModule', () => {
   /** @test {ImportedModule#isUsedInDevSource} */
   describe('#isUsedInDevSource()', () => {
     forEach([[
-      [ file('a', false), file('b', false) ], true
+      [ file('a', 'dev'), file('b', 'dev') ], true
     ], [
-      [ file('a', false), file('b', true) ], true
+      [ file('a', 'dev'), file('b', 'lib') ], true
     ], [
-      [ file('a', true), file('b', true) ], false
+      [ file('a', 'lib'), file('b', 'lib') ], false
     ]])
     .it(
       'returns true if the module is used in dev code',
