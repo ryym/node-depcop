@@ -45,7 +45,7 @@
     "coveralls": "^2.11.6",
     "cross-spawn": "^2.1.5",
     "esdoc": "^0.4.5",
-    "eslint": "^2.2.0",
+    "eslint": "~2.2.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-util": "^3.0.7",
