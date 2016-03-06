@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "builtins": "^1.0.3",
+    "chalk": "^1.1.1",
     "espree": "^3.0.2",
     "estraverse": "^4.1.1",
     "findup-sync": "^0.3.0",
