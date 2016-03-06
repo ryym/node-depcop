@@ -18,9 +18,7 @@ function makeReport(name, { dep, devDep }) {
 }
 
 function makeInspectors(...reports) {
-  return reports.map(report => {
-    return () => report.toObject();
-  });
+  return reports.map(report => () => report);
 }
 
 /** @test {InspectionRunner} */
