@@ -48,6 +48,21 @@ describe('ImportedModuleCollector', () => {
         'qux', 'inner'
       ]
     }],
+    ['ignores invalid loadings', {
+      code: `
+        import '';
+        import ' ';
+
+        require(variable);
+        require('exp' + 'ression');
+        require(123);
+        require('ok', 'ignore', 'rest', 'arguments');
+        require();
+        require('');
+        require('  ');
+      `,
+      modules: ['ok']
+    }],
     ['ignores relative paths', {
       code: `
         import foo from 'foo';
