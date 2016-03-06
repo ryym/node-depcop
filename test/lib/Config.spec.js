@@ -10,17 +10,17 @@ describe('Config', () => {
     it('lists all target file paths', () => {
       const config = new Config({
         checks: {},
-        libSources: [fixturePath('lib/**/*.js')],
-        devSources: [fixturePath('test/**/*.test.js')]
+        libSources: [fixturePath('config/lib/**/*.js')],
+        devSources: [fixturePath('config/test/**/*.test.js')]
       });
 
       assert.deepEqual(
         config.listAllTargetFiles().map(f => f.getPath()),
         [
-          fixturePath('lib/a.js'),
-          fixturePath('lib/sub/b.js'),
-          fixturePath('test/a.test.js'),
-          fixturePath('test/sub/b.test.js')
+          fixturePath('config/lib/a.js'),
+          fixturePath('config/lib/sub/b.js'),
+          fixturePath('config/test/a.test.js'),
+          fixturePath('config/test/sub/b.test.js')
         ]
       );
     });

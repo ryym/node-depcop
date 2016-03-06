@@ -3,9 +3,12 @@ import path from 'path';
 import loadSpecifiedConfig from '$lib/config/loadSpecifiedConfig';
 import PackageJson from '$lib/PackageJson';
 import { FIXTURES_PATH } from '../helper';
-import fixtureConfig from '../fixtures/loadSpecifiedConfig/.depcoprc';
+import fixtureConfig from '../fixtures/config/loadSpecifiedConfig/.depcoprc';
 
-const MY_FIXTURES_PATH = path.join(FIXTURES_PATH, 'loadSpecifiedConfig');
+const MY_FIXTURES_PATH = path.join(
+  FIXTURES_PATH,
+  'config/loadSpecifiedConfig'
+);
 
 /** @test {loadSpecifiedConfig} */
 describe('loadSpecifiedConfig()', () => {
