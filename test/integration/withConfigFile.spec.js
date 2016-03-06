@@ -6,7 +6,7 @@ const makeDepcop = configureDepcop(FIXTURES_PATH);
 
 describe('depcop using config file', () => {
   it('loads a config file automatically', () => {
-    const reports = makeDepcop().generateReport();
-    assert.equal(reports.length, 2);
+    const result = makeDepcop().generateReport();
+    assert.equal(result.reports.length, 2);
   });
 });

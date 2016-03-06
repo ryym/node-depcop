@@ -23,10 +23,10 @@ describe('bin/depcop', function() {
     const process = runCommand();
 
     process.stdout.on('data', data => {
-      const json = JSON.parse(String(data));
-      assert(Array.isArray(json));
+      const reports = JSON.parse(String(data)).reports;
+      assert(Array.isArray(reports));
 
-      const report = json[0];
+      const report = reports[0];
       assert.deepEqual(
         ['name', 'description', 'modules'].map(p => report.hasOwnProperty(p)),
         [true, true, true]

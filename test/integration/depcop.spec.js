@@ -23,10 +23,11 @@ function format(modules) {
   });
 }
 
-function assertReported(reports, expectedReports) {
+function assertReported(result, expectedReports) {
+  const { modules } = result.reports[0];
   const dependencies = format(expectedReports.dependencies);
   const devDependencies = format(expectedReports.devDependencies);
-  assert.deepEqual(reports.modules, { dependencies, devDependencies });
+  assert.deepEqual(modules, { dependencies, devDependencies });
 }
 
 /**
@@ -34,11 +35,11 @@ function assertReported(reports, expectedReports) {
  */
 describe('depcop', () => {
   it('detects modules which are used but unlisted in dependencies', () => {
-    const results = _makeDepcop({
+    const result = _makeDepcop({
       missing: { ignore: ['\\$special'] }
     }).generateReport();
 
-    assertReported(results[0], {
+    assertReported(result, {
       dependencies: {
         'ul_used-in-lib': [
           at('lib/a.js'),
@@ -61,9 +62,9 @@ describe('depcop', () => {
   });
 
   it('detects modules which belongs to the wrong group', () => {
-    const results = _makeDepcop({ strayed: {} }).generateReport();
+    const result = _makeDepcop({ strayed: {} }).generateReport();
 
-    assertReported(results[0], {
+    assertReported(result, {
       dependencies: {
         'lib_used-in-dev': [
           at('dev/a.js'),
@@ -86,12 +87,12 @@ describe('depcop', () => {
   });
 
   it('detects modules which are listed in dependencies but never used', () => {
-    const results = _makeDepcop({
+    const result = _makeDepcop({
       unused: { ignore: ['-somewhere$'] }
     }).generateReport();
     const pkgPath = path.join(FIXTURES_PATH, 'package.json');
 
-    assertReported(results[0], {
+    assertReported(result, {
       dependencies: {
         'lib_unused': [
           at(pkgPath)
