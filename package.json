@@ -36,6 +36,7 @@
     "findup-sync": "^0.3.0",
     "glob": "^7.0.0",
     "lodash.flatmap": "^4.2.0",
+    "lodash.isplainobject": "^4.0.3",
     "optionator": "^0.8.1"
   },
   "devDependencies": {
