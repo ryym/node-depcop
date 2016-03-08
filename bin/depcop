@@ -9,8 +9,13 @@ var logger = {
   info: console.log.bind(console),
   error: console.error.bind(console)
 };
-var pkgJsonPath = path.resolve(__dirname, '../package.json');
-var succeeded = executeCLI(process.argv, pkgJsonPath, logger);
+
+var succeeded = executeCLI({
+  cwd: process.cwd(),
+  argv: process.argv,
+  pkgJsonPath: path.resolve(__dirname, '../package.json'),
+  log: logger
+});
 
 process.on('exit', function() {
   process.exit(succeeded ? 0 : 1);
