@@ -1,15 +1,13 @@
 {
   "name": "depcop",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Validate dependencies list in package.json",
   "main": "build/index.js",
   "scripts": {
     "build": "gulp build",
     "dev": "gulp",
-    "test": "gulp check",
-    "test:strict": "gulp check:strict",
-    "coverage": "nyc gulp test",
-    "precoveralls": "npm run coverage",
+    "test": "nyc gulp check",
+    "test:strict": "nyc gulp check:strict",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "preversion": "npm run test:strict && npm run build"
   },
@@ -47,7 +45,7 @@
     "coveralls": "^2.11.6",
     "cross-spawn": "^2.1.5",
     "esdoc": "^0.4.5",
-    "eslint": "^2.2.0",
+    "eslint": "~2.2.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-util": "^3.0.7",
@@ -59,9 +57,9 @@
     "sinon": "^1.17.3"
   },
   "nyc": {
-    "exclude": [
-      "gulpfile.babel.js",
-      "test/**/*"
+    "include": [
+      "lib/**/*",
+      "bin/*"
     ]
   }
 }
