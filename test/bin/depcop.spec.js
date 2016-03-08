@@ -19,7 +19,7 @@ function runCommand() {
 describe('bin/depcop', function() {
   this.timeout(5000);
 
-  it('outputs a report', done => {
+  it.skip('outputs a report', done => {
     const process = runCommand();
 
     process.stdout.on('data', data => {
