@@ -2,6 +2,7 @@ import assert from 'power-assert';
 import forEach from 'mocha-each';
 import mergeOptions from '$lib/options/mergeOptions';
 
+/** @test {mergeOptions} */
 describe('mergeOptions()', () => {
   forEach([[
     [{
