@@ -37,7 +37,7 @@ describe('depcop', () => {
   it('detects modules which are used but unlisted in dependencies', () => {
     const result = _makeDepcop({
       missing: { ignore: ['\\$special'] }
-    }).generateReport();
+    }).runValidations();
 
     assertReported(result, {
       dependencies: {
@@ -62,7 +62,7 @@ describe('depcop', () => {
   });
 
   it('detects modules which belongs to the wrong group', () => {
-    const result = _makeDepcop({ strayed: {} }).generateReport();
+    const result = _makeDepcop({ strayed: {} }).runValidations();
 
     assertReported(result, {
       dependencies: {
@@ -89,7 +89,7 @@ describe('depcop', () => {
   it('detects modules which are listed in dependencies but never used', () => {
     const result = _makeDepcop({
       unused: { ignore: ['-somewhere$'] }
-    }).generateReport();
+    }).runValidations();
     const pkgPath = path.join(FIXTURES_PATH, 'package.json');
 
     assertReported(result, {

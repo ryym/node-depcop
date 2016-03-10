@@ -123,7 +123,7 @@ const depcop = makeDepcop({
   }
 });
 
-const result = depcop.generateReport();
+const result = depcop.runValidations();
 
 if (result.warningCount > 0) {
   const format = depcop.getFormatter();
@@ -162,7 +162,7 @@ If true, Depcop doesn't load options from a [configuration file].
 
 ### Depcop instance
 
-#### Depcop#generateReport()
+#### Depcop#runValidations()
 
 Runs validations based on the specified configuration and generate a report object.
 

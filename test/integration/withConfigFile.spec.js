@@ -7,7 +7,7 @@ describe('depcop using config file', () => {
     const result = makeDepcop({
       cwd: FIXTURES_PATH
     })
-    .generateReport();
+    .runValidations();
 
     assert.equal(result.reports.length, 2);
   });

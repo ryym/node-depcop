@@ -157,7 +157,7 @@ gulp.task('depcop', () => {
   const { makeDepcop } = require('../lib');
 
   const depcop = makeDepcop();
-  const result = depcop.generateReport();
+  const result = depcop.runValidations();
 
   if (result.warningCount > 0) {
     const format = depcop.getFormatter();
