@@ -1,8 +1,8 @@
 import findMissingModules from
-  '$lib/codeAnalyzer/inspectors/findMissingModules';
+  '$lib/codeAnalyzer/validators/findMissingModules';
 import {
   makePackageJson,
-  makeInspectorTester,
+  makeValidatorTester,
   module
 } from './helper';
 
@@ -11,14 +11,14 @@ const packageJson = makePackageJson({
   devDeps: ['dev-a', 'dev-b']
 });
 
-const testInspector = makeInspectorTester(
+const testValidator = makeValidatorTester(
   packageJson, findMissingModules
 );
 
 /** @test {findMissingModules} */
 describe('findMissingModules()', () => {
 
-  testInspector({}, [
+  testValidator({}, [
     {
       title: 'reports nothing when there are no missing modules',
       modules: [
@@ -93,7 +93,7 @@ describe('findMissingModules()', () => {
   ]);
 
   context('with `ignore` option', () => {
-    testInspector({
+    testValidator({
       ignore: ['ign-', '-mis']
     }, [
       {

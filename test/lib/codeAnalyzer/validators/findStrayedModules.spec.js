@@ -1,8 +1,8 @@
 import findStrayedModules from
-  '$lib/codeAnalyzer/inspectors/findStrayedModules';
+  '$lib/codeAnalyzer/validators/findStrayedModules';
 import {
   makePackageJson,
-  makeInspectorTester,
+  makeValidatorTester,
   module
 } from './helper';
 
@@ -11,14 +11,14 @@ const packageJson = makePackageJson({
   devDeps: ['dev-a', 'dev-b']
 });
 
-const testInspector = makeInspectorTester(
+const testValidator = makeValidatorTester(
   packageJson, findStrayedModules
 );
 
 /** @test {findStrayedModules} */
 describe('findStrayedModules()', () => {
 
-  testInspector({}, [
+  testValidator({}, [
     {
       title: 'reports nothing when all modules are used in correct places',
       modules: [

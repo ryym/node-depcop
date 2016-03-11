@@ -18,24 +18,24 @@ export function makePackageJson({ deps, devDeps }) {
 }
 
 /**
- * Create a tester function for inspectors (Curried).
+ * Create a tester function for validators (Curried).
  * The tester creates test cases for each parameter.
  * @param {PackageJson} packageJson
- * @param {Function} makeInspector
- * @param {Object} options - The options for inspector.
+ * @param {Function} makeValidator
+ * @param {Object} options - The options for validator.
  * @param {Object[]} params
  * @return {Function} A tester function.
  */
-export const makeInspectorTester = (
-  packageJson, makeInspector
+export const makeValidatorTester = (
+  packageJson, makeValidator
 ) => (
   options, params
 ) => {
-  const inspect = makeInspector(packageJson, makeReporter, options);
+  const validate = makeValidator(packageJson, makeReporter, options);
 
   params.forEach(p => {
     it(`${p.title}`, () => {
-      const report = inspect(p.modules);
+      const report = validate(p.modules);
       assert.deepEqual(report._report, p.report);
     });
   });
@@ -69,7 +69,7 @@ function arrayToObj(array, value) {
 }
 
 /**
- * Create reporter used by inspectors
+ * Create reporter used by validators
  * to report errors.
  * @private
  * @return {Object}
