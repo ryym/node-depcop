@@ -10,7 +10,8 @@
     "test:strict": "nyc gulp check:strict",
     "depcop": "node bin/depcop",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "preversion": "npm run test && npm run build"
+    "prepublish": "gulp build",
+    "preversion": "npm prune && npm run test && npm run build"
   },
   "keywords": [
     "package.json",
