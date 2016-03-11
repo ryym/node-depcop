@@ -1,5 +1,3 @@
-# :construction: WIP :construction:
-
 # Depcop - Validate dependencies in package.json
 
 [![npm](https://img.shields.io/npm/v/node-depcop.svg)][npm-version]
