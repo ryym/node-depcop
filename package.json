@@ -20,9 +20,13 @@
     "validate"
   ],
   "files": [
+    "bin",
     "build",
     "lib"
   ],
+  "bin": {
+    "depcop": "bin/depcop"
+  },
   "author": "ryym",
   "license": "MIT",
   "repository": {
