@@ -68,7 +68,7 @@ Available formats are:
 ## Validator options
 
 You can list validations you want to run using the `checks` option.
-Values of its fields must be an object.
+Their values must be an object.
 
 ```js
 checks: {
@@ -81,13 +81,13 @@ checks: {
 
 type: `Object`
 
-Enables [missing module search].
+Enables [missing module check].
 
-#### Options for missing module search
+#### Options for missing module check
 
 ##### ignore
 
-type: `(String | RegExp)[]`
+type: `(String[] | RegExp[])`
 
 The patterns of module names to be ignored. For example, when you use aliases to import some modules
 (e.g. by [webpack] or [babel-plugin-module-alias]), they should be ignored by this option.
@@ -100,13 +100,13 @@ missing: { ignore: ['alias-pattern'] }
 
 type: `Object`
 
-Enables [unused module search].
+Enables [unused module check].
 
-#### Options for unused module search
+#### Options for unused module check
 
 ##### ignore
 
-type: `(String | RegExp)[]`
+type: `(String[] | RegExp[])`
 
 The patterns of module names to be ignored.
 Some dev-dependency modules that don't be imported in source code directly should be ignored
@@ -120,11 +120,11 @@ unused: { ignore: ['babel-.+'] }
 
 type: `Object`
 
-Enables [strayed module search].
+Enables [strayed module check].
 
-[missing module search]: ./validations.md#missing-module-search
-[unused module search]: ./validations.md#unused-module-search
-[strayed module search]: ./validations.md#strayed-module-search
+[missing module check]: /docs/validations.md#missing-module-check
+[unused module check]: /docs/validations.md#unused-module-check
+[strayed module check]: /docs/validations.md#strayed-module-check
 
 [webpack]: https://webpack.github.io/
 [Babel]: https://babeljs.io/

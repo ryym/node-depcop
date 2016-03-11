@@ -18,7 +18,7 @@
 [david-dev]: https://david-dm.org/ryym/node-depcop#info=devDependencies
 
 Depcop is a tool to validate your `dependencies` and `devDependencies` in a `package.json`.
-It checks source code and warns if some dependency definitions are missing,
+It checks your source code and warns if some dependency definitions are missing,
 unused, or listed in a wrong group.
 
 ## Features
@@ -29,19 +29,19 @@ unused, or listed in a wrong group.
 
 ## Validations
 
-### [Missing module search]
+### [Missing module check]
 
 Makes sure:
 
 * all modules used in source code are listed in `dependencies` or `devDependencies`
 
-### [Unused module search]
+### [Unused module check]
 
 Makes sure:
 
 * `dependencies` and `devDependencies` don't contain modules used in any source
 
-### [Strayed module search]
+### [Strayed module check]
 
 Makes sure:
 
@@ -72,7 +72,7 @@ Please see [Usage] for details.
 
 ```sh
 # CLI
-depcop --missing --unused 'ignore:babel-' -f json
+depcop --missing -l 'lib/**/*.js' -d 'test/**/*.js','gulpfile.js'
 ```
 
 ```js
@@ -85,6 +85,9 @@ const depcop = makeDepcop({
     devSources: ['test/**/*-test.js']
   }
 });
+
+const result = depcop.runValidations();
+
 // ..
 ```
 
@@ -127,15 +130,15 @@ The goal of this module is to prevent such a tragedy.
 * [dependency-check] - A CLI tool to check missing or unused dependencies.
 * [require-lint] - A CLI tool which also supports [CoffeeScript].
 
-[Missing module search]: ./validations.md#missing-module-search
-[Unused module search]: ./validations.md#unused-module-search
-[Strayed module search]: ./validations.md#strayed-module-search
+[Missing module check]: /docs/validations.md#missing-module-check
+[Unused module check]: /docs/validations.md#unused-module-check
+[Strayed module check]: /docs/validations.md#strayed-module-check
 
-[Validations]: ./docs/validations.md
-[Usage]: ./docs/usage.md
-[CLI]: ./docs/usage.md#Command-Line-Interface
-[Node.js API]: ./docs/usage.md#Node.js-API
-[Configuring Depcop]: ./docs/configuration.md
+[Validations]: /docs/validations.md
+[Usage]: /docs/usage.md
+[CLI]: /docs/usage.md#command-line-interface
+[Node.js API]: /docs/usage.md#nodejs-API
+[Configuring Depcop]: /docs/configuration.md
 
 [dependency-check]: https://github.com/maxogden/dependency-check
 [require-lint]: https://github.com/TabDigital/require-lint

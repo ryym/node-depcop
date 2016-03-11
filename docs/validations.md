@@ -2,11 +2,11 @@
 
 Depcop provides several ways to validate `dependencies` and `devDependencies`.
 
-## Missing module search
+## Missing module check
 
-This validation searches source code and warns if one or more missing modules are found.
-The _missing module_ is a module which is used but not listed
-in `dependencies` nor `devDependencies`.
+This validation warns if there are one or more _missing modules_.
+It is a module which is used somewhere but not listed in
+`dependencies` nor `devDependencies`.
 
 ### Example
 
@@ -38,10 +38,10 @@ import App from './components/App';
 // routing definitions...
 ```
 
-## Unused module search
+## Unused module check
 
-This validation searches source code and warns if one or more unused modules are found.
-The _unused module_ is a module which is listed in `dependencies` or `devDependencies`
+This validation warns if there are one or more _unsued modules_.
+It is a module which is listed in `dependencies` or `devDependencies`
 but used in nowhere.
 
 ### Example
@@ -77,11 +77,10 @@ describe('someModule', () => {
 });
 ```
 
-## Strayed module search
+## Strayed module check
 
-This validation searches source code and warns if one or more strayed modules are found.
-The _strayed module_ is a module which is used in a wrong place.
-There are two patterns of a strayed module:
+This validation warns if there are one or more _strayed modules_.
+It is a module which is used in a wrong place. There are two patterns of a strayed module:
 
 * A module defined in `dependencies` but used only in development code
 * A module defined in `devDependencies` but used in library code

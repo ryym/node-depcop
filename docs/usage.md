@@ -14,7 +14,7 @@ You can run validations via CLI.
 Usage: depcop [option..]
 ```
 
-Not: If you install Depcop locally, you have to execute it like:
+Note: If you install Depcop locally, you have to execute it like:
 
 ```sh
 # Run depcop in './node_modules'.
@@ -70,8 +70,8 @@ depcop -f json
 
 ### --missing
 
-Enables [missing module search]. You can also specify validator options
-as values of the option ([configuring missing search]).
+Enables [missing module check]. You can also specify validator options
+as values of the option ([configuring missing module check]).
 
 ```sh
 depcop --missing 'ignore:foo'
@@ -79,8 +79,8 @@ depcop --missing 'ignore:foo'
 
 ### --unused
 
-Enables [unused module search]. You can also specify validator options
-as values of the option ([configuring unused search]).
+Enables [unused module check]. You can also specify validator options
+as values of the option ([configuring unused module check]).
 
 ```sh
 depcop --unused 'ignore:bar'
@@ -88,7 +88,7 @@ depcop --unused 'ignore:bar'
 
 ### --strayed
 
-Enables [strayed module search].
+Enables [strayed module check].
 
 ```sh
 depcop --strayed
@@ -173,18 +173,17 @@ is returned
 ([available formats][configuring format]).
 
 
+[configuration file]: /docs/configuration.md#configuration-file
+[configuring library sources]: /docs/configuration.md#libsources
+[configuring development sources]: /docs/configuration.md#devsources
+[configuring format]: /docs/configuration.md#format
+[configuring missing module check]: /docs/configuration.md#checksmissing
+[configuring unused module check]: /docs/configuration.md#checksunused
+[configuring strayed module check]: /docs/configuration.md#checksstrayed
 
-[configuration file]: ./configuration.md#configuration-file
-[configuring library sources]: ./configuration.md#libSources
-[configuring development sources]: ./configuration.md#devSources
-[configuring format]: ./configuration.md#format
-[configuring missing search]: ./configuration.md#checks.missing
-[configuring unused search]: ./configuration.md#checks.unused
-[configuring strayed search]: ./configuration.md#checks.strayed
-
-[missing module search]: ./validations.md#missing-module-search
-[unused module search]: ./validations.md#unused-module-search
-[strayed module search]: ./validations.md#strayed-module-search
+[missing module check]: /docs/validations.md#missing-module-check
+[unused module check]: /docs/validations.md#unused-module-check
+[strayed module check]: /docs/validations.md#strayed-module-check
 
 [optionator]: https://github.com/gkz/optionator
 [levn]: https://github.com/gkz/levn
