@@ -29,7 +29,8 @@ gulp.task('check', [
 
 gulp.task('lint:all', [
   'lint',
-  'lint:gulp:fix'
+  'lint:gulp:fix',
+  'depcop'
 ]);
 
 gulp.task('lint', [
@@ -147,6 +148,22 @@ gulp.task('_lint:enableFix', () => {
 
 gulp.task('_lint:disallowWarns', () => {
   $.lintFiles.disallowWarns = true;
+});
+
+gulp.task('depcop', () => {
+
+  // Don't load 'depcop' at the top level
+  // because the source code may be unstable.
+  const { makeDepcop } = require('../lib');
+
+  const depcop = makeDepcop();
+  const result = depcop.runValidations();
+
+  if (result.warningCount > 0) {
+    const format = depcop.getFormatter();
+    console.log(format(result));
+    throw new Error('depcop warned some dependencies');
+  }
 });
 
 // -----------------------------------------------

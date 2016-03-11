@@ -2,24 +2,21 @@
 
 'use strict';
 
-if (process.argv.length < 3 || process.argv.length > 4) {
-  console.log(
-    'Usage: depcop [lib-source-pattern] [dev-source-pattern]'
-  );
-  return;
-}
+var path = require('path');
+var executeCLI = require('../build/cli');
 
-var makeDepcop = require('../build')();
+var logger = {
+  info: console.log.bind(console),
+  error: console.error.bind(console)
+};
 
-var libSources = process.argv[2];
-var devSources = process.argv[3];
-
-var depcop = makeDepcop({
-  libSources: [libSources],
-  devSources: [devSources]
+var succeeded = executeCLI({
+  cwd: process.cwd(),
+  argv: process.argv,
+  pkgJsonPath: path.resolve(__dirname, '../package.json'),
+  log: logger
 });
 
-var report = depcop.generateReport();
-var format = depcop.getFormatter();
-
-console.log(format(report));
+process.on('exit', function() {
+  process.exit(succeeded ? 0 : 1);
+});

@@ -7,10 +7,8 @@ const BIN_COMMAND = path.join('bin', 'depcop');
 
 function runCommand() {
   return spawn(BIN_COMMAND, [
-    '"lib/**/*.js"', '"test/**/*.spec.js"'
-  ], {
-    cwd: ROOT_DIR
-  });
+    '--no-depcoprc', '-f', 'json'
+  ], { cwd: ROOT_DIR });
 }
 
 /**
@@ -23,13 +21,10 @@ describe('bin/depcop', function() {
     const process = runCommand();
 
     process.stdout.on('data', data => {
-      const json = JSON.parse(String(data));
-      assert(Array.isArray(json));
-
-      const report = json[0];
+      const result = JSON.parse(String(data));
       assert.deepEqual(
-        ['name', 'description', 'modules'].map(p => report.hasOwnProperty(p)),
-        [true, true, true]
+        result,
+        { warningCount: 0, reports: [] }
       );
     });
 

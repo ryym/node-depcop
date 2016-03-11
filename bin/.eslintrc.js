@@ -4,6 +4,8 @@ module.exports = {
   },
   "rules": {
     "no-var": 0,
-    "no-console": 0
+    "no-console": 0,
+    "prefer-arrow-callback": 0,
+    "no-process-exit": 0
   }
 }

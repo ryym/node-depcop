@@ -33,6 +33,36 @@ describe('ImportedModuleCollector', () => {
         'module5', 'module6'
       ]
     }],
+    ['recognizes \'require\' calls', {
+      code: `
+        var foo = require('foo');
+        var bar = require('bar')({ option: null });
+        var baz = baz || require('baz');
+        require('qux');
+        if (shouldUse) {
+          var a = require('inner');
+        }
+      `,
+      modules: [
+        'foo', 'bar', 'baz',
+        'qux', 'inner'
+      ]
+    }],
+    ['ignores invalid loadings', {
+      code: `
+        import '';
+        import ' ';
+
+        require(variable);
+        require('exp' + 'ression');
+        require(123);
+        require('ok', 'ignore', 'rest', 'arguments');
+        require();
+        require('');
+        require('  ');
+      `,
+      modules: ['ok']
+    }],
     ['ignores relative paths', {
       code: `
         import foo from 'foo';
@@ -40,8 +70,14 @@ describe('ImportedModuleCollector', () => {
         import baz from '../baz';
         import qux from './some/dir/qux';
         import quux from '../../../quux';
+
+        require('foo2');
+        require('./bar');
+        require('../baz');
+        require('./some/dir/qux');
+        require('../../../quux');
       `,
-      modules: ['foo']
+      modules: ['foo', 'foo2']
     }],
     ['ignores builtin modules (e.g. fs, path)', {
       code: `
@@ -52,8 +88,21 @@ describe('ImportedModuleCollector', () => {
         import _bar from 'bar';
         import assert from 'assert';
         import _baz from 'baz';
+
+        if (shouldLoad) {
+          var fs = require('fs');
+          var _foo = require('foo2');
+          var path = require('path');
+          var crypto = require('crypto');
+          var _bar = require('bar2');
+          var assert = require('assert');
+          var _baz = require('baz2');
+        }
       `,
-      modules: ['foo', 'bar', 'baz']
+      modules: [
+        'foo', 'bar', 'baz',
+        'foo2', 'bar2', 'baz2'
+      ]
     }],
     ['ignores modules in subdirectories', {
       code: `
@@ -61,8 +110,18 @@ describe('ImportedModuleCollector', () => {
         import bar from 'bar/sub/a';
         import bar from 'bar/sub/b';
         import baz from 'baz/inner/SomeClass';
+
+        if (shouldLoad) {
+          var foo = require('foo2');
+          var bar = require('bar2/sub/a');
+          var bar = require('bar2/sub/b');
+          var baz = require('baz2/inner/SomeClass');
+        }
       `,
-      modules: ['foo', 'bar', 'baz']
+      modules: [
+        'foo', 'bar', 'baz',
+        'foo2', 'bar2', 'baz2'
+      ]
     }]
   ])
   .it('collects module information (%s)', (_, data) => {
@@ -85,11 +144,11 @@ describe('ImportedModuleCollector', () => {
       ], [
         FileInfo.asLib('b.js'), `
           import module1 from 'module1';
-          import module3 from 'module3';
+          var module3 = require('module3');
         `
       ], [
         FileInfo.asLib('c.js'), `
-          import module2 from 'module2';
+          var module2 = require('module2');
           import module3 from 'module3';
         `
       ]

@@ -1,6 +1,6 @@
 {
   "name": "depcop",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Validate dependencies list in package.json",
   "main": "build/index.js",
   "scripts": {
@@ -8,8 +8,10 @@
     "dev": "gulp",
     "test": "nyc gulp check",
     "test:strict": "nyc gulp check:strict",
+    "depcop": "node bin/depcop",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "preversion": "npm run test:strict && npm run build"
+    "prepublish": "gulp build",
+    "preversion": "npm prune && npm run test && npm run build"
   },
   "keywords": [
     "package.json",
@@ -19,9 +21,13 @@
     "validate"
   ],
   "files": [
+    "bin",
     "build",
     "lib"
   ],
+  "bin": {
+    "depcop": "bin/depcop"
+  },
   "author": "ryym",
   "license": "MIT",
   "repository": {
@@ -30,11 +36,14 @@
   },
   "dependencies": {
     "builtins": "^1.0.3",
+    "chalk": "^1.1.1",
     "espree": "^3.0.2",
     "estraverse": "^4.1.1",
     "findup-sync": "^0.3.0",
     "glob": "^7.0.0",
-    "lodash.flatmap": "^4.2.0"
+    "lodash.flatmap": "^4.2.0",
+    "lodash.isplainobject": "^4.0.3",
+    "optionator": "^0.8.1"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",

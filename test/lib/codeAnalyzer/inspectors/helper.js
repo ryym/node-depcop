@@ -36,7 +36,7 @@ export const makeInspectorTester = (
   params.forEach(p => {
     it(`${p.title}`, () => {
       const report = inspect(p.modules);
-      assert.deepEqual(report, p.report);
+      assert.deepEqual(report._report, p.report);
     });
   });
 };
@@ -85,8 +85,6 @@ function makeReporter() {
       report.devDep.push(moduleName);
     },
 
-    toObject() {
-      return report;
-    }
+    _report: report
   };
 }
