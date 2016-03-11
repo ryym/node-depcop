@@ -8,7 +8,9 @@
 [![Coveralls](https://img.shields.io/coveralls/ryym/node-depcop.svg)][coveralls]
 [![David](https://img.shields.io/david/ryym/node-depcop.svg)][david]
 [![David dev](https://img.shields.io/david/dev/ryym/node-depcop.svg)][david-dev]
-[![License](http://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+
+[![docs](http://img.shields.io/badge/to-docs-blue.svg)](/docs)
 
 [npm-version]: https://www.npmjs.org/package/node-depcop
 [travis-ci]: https://travis-ci.org/ryym/node-depcop

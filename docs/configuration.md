@@ -1,5 +1,15 @@
 # Configuring Depcop
 
+[![home][bg-home]](/)
+[![valdiations][bg-validations]](/docs/validations.md)
+[![configuration][bg-configuration]](/docs/configuration.md)
+[![usage][bg-usage]](/docs/usage.md)
+
+[bg-home]: https://img.shields.io/badge/to-home-blue.svg?style=flat-square
+[bg-validations]: https://img.shields.io/badge/to-validations-brightgreen.svg?style=flat-square
+[bg-configuration]: https://img.shields.io/badge/to-configuration-green.svg?style=flat-square
+[bg-usage]: https://img.shields.io/badge/to-usage-yellowgreen.svg?style=flat-square
+
 ## Configuration file
 
 Depcop has several options to controll its validations.
