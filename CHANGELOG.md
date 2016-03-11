@@ -1,3 +1,9 @@
+## 0.3.0 (2016-03-11)
+
+* Implement basic CLI
+* Add 'simple' formatter
+* Support CommonJS styles (`require` calls)
+
 ## 0.2.0 (2016-03-03)
 
 * Enable to load config file
