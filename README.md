@@ -84,7 +84,12 @@ import { makeDepcop } from 'depcop';
 const depcop = makeDepcop({
   options: {
     libSources: ['lib/**/*.js'],
-    devSources: ['test/**/*-test.js']
+    devSources: ['test/**/*-test.js'],
+    checks: {
+      unused: {
+        ignore: ['istanbul', 'mocha']
+      }
+    }
   }
 });
 
@@ -139,7 +144,7 @@ The goal of this module is to prevent such a tragedy.
 [Validations]: /docs/validations.md
 [Usage]: /docs/usage.md
 [CLI]: /docs/usage.md#command-line-interface
-[Node.js API]: /docs/usage.md#nodejs-API
+[Node.js API]: /docs/usage.md#nodejs-api
 [Configuring Depcop]: /docs/configuration.md
 
 [dependency-check]: https://github.com/maxogden/dependency-check

@@ -1,6 +1,6 @@
 # Depcop Validations
 
-[![home][bg-home]](/)
+[![home][bg-home]](/REMADE.md)
 [![valdiations][bg-validations]](/docs/validations.md)
 [![configuration][bg-configuration]](/docs/configuration.md)
 [![usage][bg-usage]](/docs/usage.md)
