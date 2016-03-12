@@ -1,7 +1,7 @@
 node_modules/
 npm-debug.log*
+tags
 
 /build/
-.nyc_output
-
 /esdoc/
+.nyc_output/
