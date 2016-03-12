@@ -99,6 +99,15 @@ describe('parseArgv()', () => {
         libSources: ['x', 'y'],
         format: 'json'
       }
+    },
+    {
+      args: ['--parser-options', 'ecmaFeatures:{jsx:true}'],
+      options: {
+        checks: {},
+        parserOptions: {
+          ecmaFeatures: { jsx: true }
+        }
+      }
     }
   ])
   .it(
