@@ -75,6 +75,30 @@ Available formats are:
 * `simple` (default)
 * `json`
 
+### ParserOptions
+
+type: `Object`
+
+The `parserOptions` is options for [Espree] which is used in Depcop to parse source code.
+When your source code is written in non-ES2015 syntax like ES2016 (ES7) or JSX,
+you have to specify the option to enable parsing.
+
+```js
+{
+  parserOptions: {
+
+    // Specify the language version. Default is 6.
+    ecmaVersion: 7,
+
+    ecmaFeatures: {
+
+      // Enable JSX parsing. Default is false.
+      jsx: true
+    }
+  }
+}
+```
+
 ## Validator options
 
 You can list validations you want to run using the `checks` option.
@@ -141,3 +165,4 @@ Enables [strayed module check].
 [babel-plugin-module-alias]: https://github.com/tleunen/babel-plugin-module-alias
 [ESLint]: http://eslint.org/
 [coveralls]: https://github.com/nickmerwin/node-coveralls
+[Espree]: https://github.com/eslint/espree

@@ -77,4 +77,55 @@ describe('verifyDependencies', () => {
       }
     }
   ]);
+
+  context('with appropriate parser options', () => {
+    testVerifier([
+      {
+        title: 'accepts code written in ES7',
+        files: {
+          a: `
+            import missing from 'missing';
+            const cubed = 2 ** 3;
+          `
+        },
+        options: {
+          checks: { missing: {} },
+          parserOptions: {
+            ecmaVersion: 7
+          }
+        },
+        result: {
+          warned: true,
+          reports: ['missing']
+        }
+      },
+      {
+        title: 'accepts code written in JSX format',
+        files: {
+          a: `
+            import React from 'react';
+
+            function Form(props) {
+              return (
+                <Container name="foo">
+                  <App key="bar" />
+                </Container>
+              );
+            }
+          `
+        },
+        options: {
+          checks: { missing: {} },
+          parserOptions: {
+            ecmaFeatures: { jsx: true }
+          }
+        },
+        result: {
+          warned: true,
+          reports: ['missing']
+        }
+      }
+    ]);
+  });
+
 });
