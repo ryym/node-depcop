@@ -1,16 +1,16 @@
 # Depcop - Validate dependencies in package.json
 
-[![npm](https://img.shields.io/npm/v/node-depcop.svg)][npm-version]
+[![npm](https://img.shields.io/npm/v/depcop.svg)][npm-version]
 [![Travis](https://img.shields.io/travis/ryym/node-depcop/master.svg)][travis-ci]
 [![Appveyor](https://ci.appveyor.com/api/projects/status/geea51i0a86loy24/branch/master?svg=true)][appveyor]
 [![Coveralls](https://img.shields.io/coveralls/ryym/node-depcop.svg)][coveralls]
 [![David](https://img.shields.io/david/ryym/node-depcop.svg)][david]
 [![David dev](https://img.shields.io/david/dev/ryym/node-depcop.svg)][david-dev]
-[![License](http://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 [![docs](http://img.shields.io/badge/to-docs-blue.svg)](/docs)
 
-[npm-version]: https://www.npmjs.org/package/node-depcop
+[npm-version]: https://www.npmjs.org/package/depcop
 [travis-ci]: https://travis-ci.org/ryym/node-depcop
 [appveyor]: https://ci.appveyor.com/project/ryym/node-depcop/branch/master
 [coveralls]: https://coveralls.io/github/ryym/node-depcop?branch=master
@@ -51,7 +51,7 @@ Makes sure:
 #### Note: definition of terms
 
 | term | description |
-| ---- | ----------- |
+|:-----|:------------|
 | library code     | Ordinary source files usually put in `./lib`. |
 | development code | Test files, config files, or build scripts like `gulpfile.js`. |
 
