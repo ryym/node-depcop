@@ -114,4 +114,48 @@ describe('findMissingModules()', () => {
     ]);
   });
 
+  context('when only `dependencies` are target', () => {
+    testValidator({
+      devDependencies: false
+    }, [
+      {
+        title: 'ignores missing `devDependencies`',
+        modules: [
+          module('lib-a', 'lib'),
+          module('lib-b', 'lib'),
+          module('lib-c', 'lib'),
+          module('dev-a', 'dev'),
+          module('dev-b', 'dev'),
+          module('dev-c', 'dev')
+        ],
+        report: {
+          dep: ['lib-c'],
+          devDep: []
+        }
+      }
+    ]);
+  });
+
+  context('when only `devDependencies` are target', () => {
+    testValidator({
+      dependencies: false
+    }, [
+      {
+        title: 'ignores missing `dependencies`',
+        modules: [
+          module('lib-a', 'lib'),
+          module('lib-b', 'lib'),
+          module('lib-c', 'lib'),
+          module('dev-a', 'dev'),
+          module('dev-b', 'dev'),
+          module('dev-c', 'dev')
+        ],
+        report: {
+          dep: [],
+          devDep: ['dev-c']
+        }
+      }
+    ]);
+  });
+
 });
