@@ -1,6 +1,7 @@
 import assert from 'power-assert';
 import PackageJson from '$lib/PackageJson';
 import Config from '$lib/Config';
+import { unindent } from '$lib/util';
 import verifyDependencies from '$lib/codeAnalyzer/verifyDependencies';
 
 const packageJson = new PackageJson('path/to/pkg', {
@@ -74,6 +75,23 @@ describe('verifyDependencies', () => {
       result: {
         warned: true,
         reports: ['unused']
+      }
+    },
+    {
+      title: 'accepts a script file starting with sebang',
+      files: {
+        a: unindent`#!/usr/bin/env node
+          var foo = require('foo');
+        `
+      },
+      options: {
+        checks: {
+          missing: {}
+        }
+      },
+      result: {
+        warned: true,
+        reports: ['missing']
       }
     }
   ]);
