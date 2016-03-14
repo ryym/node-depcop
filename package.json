@@ -34,6 +34,9 @@
     "type": "git",
     "url": "git://github.com/ryym/node-depcop.git"
   },
+  "engine": {
+    "node": ">=0.12"
+  },
   "dependencies": {
     "builtins": "^1.0.3",
     "chalk": "^1.1.1",
