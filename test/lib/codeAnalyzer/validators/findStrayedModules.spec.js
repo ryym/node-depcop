@@ -73,5 +73,45 @@ describe('findStrayedModules()', () => {
     }
   ]);
 
+  context('when only `dependencies` are target', () => {
+    testValidator({
+      devDependencies: false
+    }, [
+      {
+        title: 'ignores strayed `devDependencies`',
+        modules: [
+          module('lib-a', 'lib'),
+          module('lib-b', 'dev'),
+          module('dev-a', 'lib'),
+          module('dev-b', 'dev')
+        ],
+        report: {
+          dep: ['lib-b'],
+          devDep: []
+        }
+      }
+    ]);
+  });
+
+  context('when only `devDependencies` are target', () => {
+    testValidator({
+      dependencies: false
+    }, [
+      {
+        title: 'ignores strayed `dependencies`',
+        modules: [
+          module('lib-a', 'lib'),
+          module('lib-b', 'dev'),
+          module('dev-a', 'lib'),
+          module('dev-b', 'dev')
+        ],
+        report: {
+          dep: [],
+          devDep: ['dev-a']
+        }
+      }
+    ]);
+  });
+
 });
 
