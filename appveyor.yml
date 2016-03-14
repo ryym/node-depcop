@@ -12,9 +12,11 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - npm -g install npm@2
+  - set PATH=%APPDATA%\npm;%PATH%
+  - node --version
+  - npm --version
   - npm install
 
 test_script:
-  - node --version
-  - npm --version
   - cmd: npm test
