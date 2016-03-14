@@ -1,5 +1,6 @@
 module.exports = {
   libSources: [
+    'bin/depcop',
     'lib/**/*.js'
   ],
   devSources: [
