@@ -91,4 +91,38 @@ describe('findUnusedModules()', () => {
     ]);
   });
 
+  context('when only `dependencies` are target', () => {
+    testValidator({
+      devDependencies: false
+    }, [
+      {
+        title: 'ignores unused `devDependencies`',
+        modules: [
+          module('lib-a', 'lib')
+        ],
+        report: {
+          dep: ['lib-b'],
+          devDep: []
+        }
+      }
+    ]);
+  });
+
+  context('when only `devDependencies` are target', () => {
+    testValidator({
+      dependencies: false
+    }, [
+      {
+        title: 'ignores unused `dependencies`',
+        modules: [
+          module('dev-a', 'dev')
+        ],
+        report: {
+          dep: [],
+          devDep: ['dev-b']
+        }
+      }
+    ]);
+  });
+
 });
