@@ -34,6 +34,9 @@
     "type": "git",
     "url": "git://github.com/ryym/node-depcop.git"
   },
+  "engine": {
+    "node": ">=0.12"
+  },
   "dependencies": {
     "builtins": "^1.0.3",
     "chalk": "^1.1.1",
@@ -41,6 +44,7 @@
     "estraverse": "^4.1.1",
     "findup-sync": "^0.3.0",
     "glob": "^7.0.0",
+    "lodash.assign": "^4.0.6",
     "lodash.flatmap": "^4.2.0",
     "lodash.isplainobject": "^4.0.3",
     "optionator": "^0.8.1"

@@ -39,7 +39,8 @@ git.stdout.on('data', function(data) {
         // Strip emojis.
         .replace(/\s(?::[a-z]+:)+/, function(match) {
           var firstEmoji = match.split(':')[1];
-          return ` ${emojiNames[firstEmoji] || emojiNames.other}:`;
+          var word = emojiNames[firstEmoji] || emojiNames.other;
+          return ' ' + word + ':';
         });
     })
     .join('\n');
