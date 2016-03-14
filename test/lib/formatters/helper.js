@@ -4,25 +4,6 @@ import FileInfo from '$lib/FileInfo';
 import Report from '$lib/codeAnalyzer/Report';
 
 /**
- * A tagged template string processor to strip
- * unnecessary indents.
- */
-export function unindent(strings, ...values) {
-  const lines = String.raw(strings, values).split('\n');
-
-  const minIndents = lines
-    .filter(line => /\S/.test(line))
-    .reduce((min, line) => {
-      const nIndents = line.match(/^\s+/)[0].length;
-      return Math.min(min, nIndents);
-    }, Infinity);
-
-  return lines
-    .map(line => line.substring(minIndents))
-    .join('\n');
-}
-
-/**
  * Create a report using {@link Report} class.
  * @param {string} description
  * @param {Object} modules
