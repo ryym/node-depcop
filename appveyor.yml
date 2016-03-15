@@ -20,3 +20,8 @@ install:
 
 test_script:
   - cmd: npm test
+
+notifications:
+  - provider: Slack
+    incoming_webhook:
+      secure: Dau2OYui+VFWWbtHe9WVSFZAS+lI4Nou2yjHZY9vvhfD/BU0c5WwgnbS1QjDQjfKYq01QZwF+8/j2cngPGkbXcSK+3YWRVZaRf9Rzyl9xNg=
