@@ -78,7 +78,7 @@ describe('verifyDependencies', () => {
       }
     },
     {
-      title: 'accepts a script file starting with sebang',
+      title: 'accepts a script file starting with shebang',
       files: {
         a: unindent`#!/usr/bin/env node
           var foo = require('foo');
