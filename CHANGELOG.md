@@ -1,3 +1,9 @@
+## 0.3.0 (2016-03-15)
+
+* Add option to configure parser
+* Add option to validate either dependencies or devDependencies 
+* Ignore shebangs
+
 ## 0.3.0 (2016-03-11)
 
 * Implement basic CLI
