@@ -102,12 +102,13 @@ Enables [unused module check]. You can also specify validator options
 as values of the option ([configuring unused module check]).
 
 ```sh
-depcop --unused 'ignore:bar'
+depcop --unused 'devDependencies:false'
 ```
 
 ### --strayed
 
-Enables [strayed module check].
+Enables [strayed module check]. You can also specify validator options
+as values of the option ([configuring strayed module check]).
 
 ```sh
 depcop --strayed

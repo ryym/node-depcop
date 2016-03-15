@@ -12,6 +12,7 @@
 
 
 Depcop provides several ways to validate `dependencies` and `devDependencies`.
+For configurations of validators, see [configuration](/docs/configuration.md).
 
 ## Missing module check
 

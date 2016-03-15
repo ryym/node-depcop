@@ -117,7 +117,21 @@ type: `Object`
 
 Enables [missing module check].
 
-#### Options for missing module check
+#### Options
+
+##### dependencies
+
+type: `Boolean`
+
+Whether or not the `dependencies` should be checked (Default is true).
+If false, the validator only warns about modules listed in `devDependencies`.
+
+##### devDependencies
+
+type: `Boolean`
+
+Whether or not the `devDependencies` should be checked (Default is true).
+If false, the validator only warns about modules listed in `dependencies`.
 
 ##### ignore
 
@@ -136,7 +150,21 @@ type: `Object`
 
 Enables [unused module check].
 
-#### Options for unused module check
+#### Options
+
+##### dependencies
+
+type: `Boolean`
+
+Whether or not the `dependencies` should be checked (Default is true).
+If false, the validator only warns about modules listed in `devDependencies`.
+
+##### devDependencies
+
+type: `Boolean`
+
+Whether or not the `devDependencies` should be checked (Default is true).
+If false, the validator only warns about modules listed in `dependencies`.
 
 ##### ignore
 
@@ -155,6 +183,22 @@ unused: { ignore: ['babel-.+'] }
 type: `Object`
 
 Enables [strayed module check].
+
+#### Options
+
+##### dependencies
+
+type: `Boolean`
+
+Whether or not the `dependencies` should be checked (Default is true).
+If false, the validator only warns about modules listed in `devDependencies`.
+
+##### devDependencies
+
+type: `Boolean`
+
+Whether or not the `devDependencies` should be checked (Default is true).
+If false, the validator only warns about modules listed in `dependencies`.
 
 [missing module check]: /docs/validations.md#missing-module-check
 [unused module check]: /docs/validations.md#unused-module-check
