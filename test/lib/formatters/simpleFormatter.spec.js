@@ -1,6 +1,7 @@
 import simpleFormatter from '$lib/formatters/simpleFormatter';
+import { unindent } from '$lib/util';
 import {
-  unindent, report, testFormatter
+  report, testFormatter
 } from './helper';
 
 /** @test {simpleFormatter} */

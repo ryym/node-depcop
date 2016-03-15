@@ -3,7 +3,7 @@
 'use strict';
 
 var path = require('path');
-var executeCLI = require('../build/cli');
+var executeCLI = require('../build/cli').executeCLI;
 
 var logger = {
   info: console.log.bind(console),

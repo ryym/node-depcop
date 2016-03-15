@@ -1,0 +1,6 @@
+--languages=javascript
+--exclude=node_modules
+--exclude=build
+--exclude=esdoc
+--exclude=.nyc_output
+--exclude=.*.js

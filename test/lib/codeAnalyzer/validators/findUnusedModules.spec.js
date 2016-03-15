@@ -1,8 +1,8 @@
 import findUnusedModules from
-  '$lib/codeAnalyzer/inspectors/findUnusedModules';
+  '$lib/codeAnalyzer/validators/findUnusedModules';
 import {
   makePackageJson,
-  makeInspectorTester,
+  makeValidatorTester,
   module
 } from './helper';
 
@@ -11,14 +11,14 @@ const packageJson = makePackageJson({
   devDeps: ['dev-a', 'dev-b']
 });
 
-const testInspector = makeInspectorTester(
+const testValidator = makeValidatorTester(
   packageJson, findUnusedModules
 );
 
 /** @test {findUnusedModules} */
 describe('findUnusedModules()', () => {
 
-  testInspector({}, [
+  testValidator({}, [
     {
       title: 'reports nothing when all listed modules are used',
       modules: [
@@ -74,7 +74,7 @@ describe('findUnusedModules()', () => {
   ]);
 
   context('with `ignore` option', () => {
-    testInspector({
+    testValidator({
       ignore: ['lib-a', 'dev-b']
     }, [
       {
@@ -86,6 +86,40 @@ describe('findUnusedModules()', () => {
         report: {
           dep: [],
           devDep: []
+        }
+      }
+    ]);
+  });
+
+  context('when only `dependencies` are target', () => {
+    testValidator({
+      devDependencies: false
+    }, [
+      {
+        title: 'ignores unused `devDependencies`',
+        modules: [
+          module('lib-a', 'lib')
+        ],
+        report: {
+          dep: ['lib-b'],
+          devDep: []
+        }
+      }
+    ]);
+  });
+
+  context('when only `devDependencies` are target', () => {
+    testValidator({
+      dependencies: false
+    }, [
+      {
+        title: 'ignores unused `dependencies`',
+        modules: [
+          module('dev-a', 'dev')
+        ],
+        report: {
+          dep: [],
+          devDep: ['dev-b']
         }
       }
     ]);

@@ -8,10 +8,15 @@ describe('Config', () => {
   /** @test {Config#listAllTargetFiles} */
   describe('#listAllTargetFiles()', () => {
     it('lists all target file paths', () => {
-      const config = new Config({
-        checks: {},
-        libSources: [fixturePath('config/lib/**/*.js')],
-        devSources: [fixturePath('config/test/**/*.test.js')]
+      const config = new Config({}, {
+        libSources: [
+          fixturePath('config/lib/a.js'),
+          fixturePath('config/lib/sub/b.js')
+        ],
+        devSources: [
+          fixturePath('config/test/a.test.js'),
+          fixturePath('config/test/sub/b.test.js')
+        ]
       });
 
       assert.deepEqual(

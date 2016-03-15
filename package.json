@@ -1,7 +1,7 @@
 {
   "name": "depcop",
-  "version": "0.3.1",
-  "description": "Validate dependencies list in package.json",
+  "version": "0.4.0",
+  "description": "Validate dependencies and devDependencies in package.json",
   "main": "build/index.js",
   "scripts": {
     "build": "gulp build",
@@ -34,6 +34,9 @@
     "type": "git",
     "url": "git://github.com/ryym/node-depcop.git"
   },
+  "engine": {
+    "node": ">=0.12"
+  },
   "dependencies": {
     "builtins": "^1.0.3",
     "chalk": "^1.1.1",
@@ -41,6 +44,7 @@
     "estraverse": "^4.1.1",
     "findup-sync": "^0.3.0",
     "glob": "^7.0.0",
+    "lodash.assign": "^4.0.6",
     "lodash.flatmap": "^4.2.0",
     "lodash.isplainobject": "^4.0.3",
     "optionator": "^0.8.1"
@@ -60,7 +64,7 @@
     "gulp-util": "^3.0.7",
     "mocha": "^2.4.5",
     "mocha-each": "^1.0.3",
-    "nyc": "^5.6.0",
+    "nyc": "^6.0.0",
     "power-assert": "^1.2.0",
     "rimraf": "^2.5.2",
     "sinon": "^1.17.3"

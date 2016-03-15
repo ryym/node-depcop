@@ -78,6 +78,15 @@ Allows you to specify a format of validation results
 depcop -f json
 ```
 
+### -p, --parser-options
+
+Allows you to specify parser options to be used by Depcop
+([configuring parser options]).
+
+```sh
+depcop --parser-options ecmaVersion:7
+```
+
 ### --missing
 
 Enables [missing module check]. You can also specify validator options
@@ -93,12 +102,13 @@ Enables [unused module check]. You can also specify validator options
 as values of the option ([configuring unused module check]).
 
 ```sh
-depcop --unused 'ignore:bar'
+depcop --unused 'devDependencies:false'
 ```
 
 ### --strayed
 
-Enables [strayed module check].
+Enables [strayed module check]. You can also specify validator options
+as values of the option ([configuring strayed module check]).
 
 ```sh
 depcop --strayed
@@ -192,6 +202,7 @@ is returned
 [configuring missing module check]: /docs/configuration.md#checksmissing
 [configuring unused module check]: /docs/configuration.md#checksunused
 [configuring strayed module check]: /docs/configuration.md#checksstrayed
+[configuring parser options]: /docs/configuration.md#parseroptions
 
 [missing module check]: /docs/validations.md#missing-module-check
 [unused module check]: /docs/validations.md#unused-module-check
