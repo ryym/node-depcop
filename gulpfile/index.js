@@ -24,7 +24,8 @@ gulp.task('check:strict', [
 
 gulp.task('check', [
   'lint:all',
-  'test'
+  'test',
+  'doc'
 ]);
 
 gulp.task('lint:all', [
