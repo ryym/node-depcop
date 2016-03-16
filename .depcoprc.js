@@ -4,7 +4,7 @@ module.exports = {
     'lib/**/*.js'
   ],
   devSources: [
-    'gulpfile/*.js',
+    'gulpfiles/**/*.js',
     'test/**/*.spec.js',
     'test/**/helper.js'
   ],
