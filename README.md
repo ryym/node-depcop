@@ -134,6 +134,7 @@ The goal of this module is to prevent such a tragedy.
 
 * [dependency-check] - A CLI tool to check missing or unused dependencies.
 * [require-lint] - A CLI tool which also supports [CoffeeScript].
+* [eslint-plugin-node] - A ESLint plugin for Node.js. Linting dependencies is one of its features.
 
 [Missing module check]: /docs/validations.md#missing-module-check
 [Unused module check]: /docs/validations.md#unused-module-check
@@ -145,6 +146,8 @@ The goal of this module is to prevent such a tragedy.
 [Node.js API]: /docs/usage.md#nodejs-api
 [Configuring Depcop]: /docs/configuration.md
 
+[eslint-plugin-node]: https://github.com/mysticatea/eslint-plugin-node
 [dependency-check]: https://github.com/maxogden/dependency-check
 [require-lint]: https://github.com/TabDigital/require-lint
+
 [CoffeeScript]: http://coffeescript.org/
