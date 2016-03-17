@@ -16,6 +16,7 @@ var emojiNames = {
   sunny:    'feat ',  // A backwords-compatible feature or enhancement.
   zap:      'break',  // A backwords-incompatible feature or enhancement.
   lock:     'test ',  // Adding or correcting tests.
+  unlock:   'fail ',  // Adding failing tests reproducing a bug.
   bug:      'fix  ',  // A bug fix.
   sparkles: 'refac',  // A code change that neither fixes a bug nor adds a feature.
   memo:     'docs ',  // Changes to documentation.
