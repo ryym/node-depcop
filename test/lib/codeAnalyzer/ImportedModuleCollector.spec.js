@@ -58,6 +58,16 @@ describe('ImportedModuleCollector', () => {
         'qux', 'inner'
       ]
     }],
+    ['ignores \'export\'s that just exports something', {
+      code: `
+      export { foo };
+      export { a as default, b as B };
+      export const module1 = 1;
+      export function hello() {};
+      export default function greet() {};
+      `,
+      modules: []
+    }],
     ['ignores invalid loadings', {
       code: `
         import '';
