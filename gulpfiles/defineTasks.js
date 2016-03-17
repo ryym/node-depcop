@@ -16,14 +16,20 @@ module.exports = function defineTasks(tasks) {
   ]);
 
   gulp.task('check:strict', [
-    '_lint:disallowWarns',
-    'check'
+    'lint:strict',
+    'test',
+    'doc'
   ]);
 
   gulp.task('check', [
     'lint:all',
     'test',
     'doc'
+  ]);
+
+  gulp.task('lint:strict', [
+    '_lint:disallowWarns',
+    'lint:all'
   ]);
 
   gulp.task('lint:all', [
@@ -70,6 +76,10 @@ module.exports = function defineTasks(tasks) {
     gulp.task(lintTaskName + ':fix', tasks.lint(
       target, { fix: true }
     ));
+  });
+
+  gulp.task('_lint:disallowWarns', function() {
+    tasks.state.disallowWarns = true;
   });
 
   gulp.task('lint:watch', tasks.lintWatch([

@@ -15,6 +15,11 @@ import * as $ from './helper';
  * All tasks must be curried to allow clients to pass options.
  */
 
+/**
+ * The object to store any state about tasks.
+ */
+export const state = {};
+
 // -----------------------------------------------
 // Build tasks
 // -----------------------------------------------
@@ -88,9 +93,9 @@ export const testPrepare = () => () => {
 // -----------------------------------------------
 
 export const lint = (target, options = {}) => () => {
-  const { fix, disallowWarns } = options;
+  const { fix } = options;
   const globPattern = $.GLOB[target];
-  $.lintFiles([globPattern], { fix }, disallowWarns);
+  $.lintFiles([globPattern], { fix }, state.disallowWarns);
 };
 
 export const lintWatch = targets => () => {
