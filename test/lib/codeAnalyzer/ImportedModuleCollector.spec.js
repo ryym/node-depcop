@@ -33,6 +33,16 @@ describe('ImportedModuleCollector', () => {
         'module5', 'module6'
       ]
     }],
+    ['recognizes \'export\'s that imports a module', {
+      code: `
+        export * from 'foo';
+        export { a, b, c } from 'bar';
+        export { a as A, b as B, c } from 'baz';
+      `,
+      modules: [
+        'foo', 'bar', 'baz'
+      ]
+    }],
     ['recognizes \'require\' calls', {
       code: `
         var foo = require('foo');
@@ -53,6 +63,8 @@ describe('ImportedModuleCollector', () => {
         import '';
         import ' ';
 
+        export * from '';
+
         require(variable);
         require('exp' + 'ression');
         require(123);
@@ -71,6 +83,9 @@ describe('ImportedModuleCollector', () => {
         import qux from './some/dir/qux';
         import quux from '../../../quux';
 
+        export * from './some/dir/qux';
+        export { a } from '../../../quux';
+
         require('foo2');
         require('./bar');
         require('../baz');
@@ -88,6 +103,9 @@ describe('ImportedModuleCollector', () => {
         import _bar from 'bar';
         import assert from 'assert';
         import _baz from 'baz';
+
+        export * from 'path';
+        export { equal } from 'assert';
 
         if (shouldLoad) {
           var fs = require('fs');
@@ -111,6 +129,9 @@ describe('ImportedModuleCollector', () => {
         import bar from 'bar/sub/b';
         import baz from 'baz/inner/SomeClass';
 
+        export * from 'qux/sub/a';
+        export * from 'quux/inner/SomeClass';
+
         if (shouldLoad) {
           var foo = require('foo2');
           var bar = require('bar2/sub/a');
@@ -120,6 +141,7 @@ describe('ImportedModuleCollector', () => {
       `,
       modules: [
         'foo', 'bar', 'baz',
+        'qux', 'quux',
         'foo2', 'bar2', 'baz2'
       ]
     }]
