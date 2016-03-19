@@ -45,8 +45,20 @@ describe('findStrayedModules()', () => {
       }
     },
     {
+      title: `does not report if the module listed in  \`dependencies\` is
+        used in both of lib sources and dev sources`,
+      modules: [
+        module('lib-a', 'lib', 'dev'),
+        module('lib-b', 'lib')
+      ],
+      report: {
+        dep: [],
+        devDep: []
+      }
+    },
+    {
       title: `reports as strayed dependency if the module is
-        listed in \`dependencies\``,
+        used only in dev sources but listed in \`dependencies\``,
       modules: [
         module('lib-a', 'div'),
         module('lib-b', 'dev'),
@@ -59,11 +71,11 @@ describe('findStrayedModules()', () => {
     },
     {
       title: `reports as strayed dev-dependency if the module is
-        listed in \`devDependencies\``,
+        used in lib sources but listed in \`devDependencies\``,
       modules: [
         module('lib-a', 'lib'),
         module('dev-a', 'lib'),
-        module('dev-b', 'lib')
+        module('dev-b', 'lib', 'dev')
       ],
       report: {
         dep: [],
