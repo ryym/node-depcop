@@ -1,5 +1,4 @@
-import findMissingModules from
-  '$lib/codeAnalyzer/validators/findMissingModules';
+import findMissingModules from '$lib/validators/findMissingModules';
 import {
   makePackageJson,
   makeValidatorTester,

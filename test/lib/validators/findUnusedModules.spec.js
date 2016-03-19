@@ -1,5 +1,4 @@
-import findStrayedModules from
-  '$lib/codeAnalyzer/validators/findStrayedModules';
+import findUnusedModules from '$lib/validators/findUnusedModules';
 import {
   makePackageJson,
   makeValidatorTester,
@@ -12,15 +11,15 @@ const packageJson = makePackageJson({
 });
 
 const testValidator = makeValidatorTester(
-  packageJson, findStrayedModules
+  packageJson, findUnusedModules
 );
 
-/** @test {findStrayedModules} */
-describe('findStrayedModules()', () => {
+/** @test {findUnusedModules} */
+describe('findUnusedModules()', () => {
 
   testValidator({}, [
     {
-      title: 'reports nothing when all modules are used in correct places',
+      title: 'reports nothing when all listed modules are used',
       modules: [
         module('lib-a', 'lib'),
         module('lib-b', 'lib'),
@@ -33,11 +32,13 @@ describe('findStrayedModules()', () => {
       }
     },
     {
-      title: 'does not care about missing or unused modules',
+      title: 'does not care about missing or strayed modules',
       modules: [
         module('lib-a', 'lib'),
+        module('lib-b', 'dev'),
         module('lib-z', 'lib'),
         module('dev-a', 'dev'),
+        module('dev-b', 'lib'),
         module('dev-z', 'dev')
       ],
       report: {
@@ -46,12 +47,11 @@ describe('findStrayedModules()', () => {
       }
     },
     {
-      title: `reports as strayed dependency if the module is
+      title: `reports as unused dependency if the module is
         listed in \`dependencies\``,
       modules: [
-        module('lib-a', 'div'),
-        module('lib-b', 'dev'),
-        module('dev-a', 'dev')
+        module('dev-a', 'lib'),
+        module('dev-b', 'dev')
       ],
       report: {
         dep: ['lib-a', 'lib-b'],
@@ -59,12 +59,11 @@ describe('findStrayedModules()', () => {
       }
     },
     {
-      title: `reports as strayed dev-dependency if the module is
+      title: `reports as unused dev-dependency if the module is
         listed in \`devDependencies\``,
       modules: [
         module('lib-a', 'lib'),
-        module('dev-a', 'lib'),
-        module('dev-b', 'lib')
+        module('lib-b', 'dev')
       ],
       report: {
         dep: [],
@@ -73,17 +72,32 @@ describe('findStrayedModules()', () => {
     }
   ]);
 
+  context('with `ignore` option', () => {
+    testValidator({
+      ignore: ['lib-a', 'dev-b']
+    }, [
+      {
+        title: 'ignores modules that match with the specified patterns',
+        modules: [
+          module('lib-b', 'lib'),
+          module('dev-a', 'dev')
+        ],
+        report: {
+          dep: [],
+          devDep: []
+        }
+      }
+    ]);
+  });
+
   context('when only `dependencies` are target', () => {
     testValidator({
       devDependencies: false
     }, [
       {
-        title: 'ignores strayed `devDependencies`',
+        title: 'ignores unused `devDependencies`',
         modules: [
-          module('lib-a', 'lib'),
-          module('lib-b', 'dev'),
-          module('dev-a', 'lib'),
-          module('dev-b', 'dev')
+          module('lib-a', 'lib')
         ],
         report: {
           dep: ['lib-b'],
@@ -98,20 +112,16 @@ describe('findStrayedModules()', () => {
       dependencies: false
     }, [
       {
-        title: 'ignores strayed `dependencies`',
+        title: 'ignores unused `dependencies`',
         modules: [
-          module('lib-a', 'lib'),
-          module('lib-b', 'dev'),
-          module('dev-a', 'lib'),
-          module('dev-b', 'dev')
+          module('dev-a', 'dev')
         ],
         report: {
           dep: [],
-          devDep: ['dev-a']
+          devDep: ['dev-b']
         }
       }
     ]);
   });
 
 });
-
