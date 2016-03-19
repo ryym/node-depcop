@@ -7,7 +7,8 @@ import {
 
 const packageJson = makePackageJson({
   deps: ['lib-a', 'lib-b'],
-  devDeps: ['dev-a', 'dev-b']
+  devDeps: ['dev-a', 'dev-b'],
+  peerDeps: ['per-a', 'per-b']
 });
 
 const testValidator = makeValidatorTester(
@@ -70,6 +71,19 @@ describe('findMissingModules()', () => {
       report: {
         dep: ['lib-c', 'dev-c'],
         devDep: ['dev-d']
+      }
+    },
+    {
+      title: 'does not report if the module is listed in `peerDependencies`',
+      modules: [
+        module('lib-a', 'lib'),
+        module('per-a', 'lib'),
+        module('dev-a', 'dev'),
+        module('per-b', 'dev')
+      ],
+      report: {
+        dep: [],
+        devDep: []
       }
     },
     {
@@ -145,6 +159,7 @@ describe('findMissingModules()', () => {
           module('lib-a', 'lib'),
           module('lib-b', 'lib'),
           module('lib-c', 'lib'),
+          module('per-a', 'lib'),
           module('dev-a', 'dev'),
           module('dev-b', 'dev'),
           module('dev-c', 'dev')
