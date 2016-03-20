@@ -7,7 +7,8 @@ import {
 
 const packageJson = makePackageJson({
   deps: ['lib-a', 'lib-b'],
-  devDeps: ['dev-a', 'dev-b']
+  devDeps: ['dev-a', 'dev-b', 'per-b'],
+  peerDeps: ['per-a', 'per-b']
 });
 
 const testValidator = makeValidatorTester(
@@ -57,6 +58,32 @@ describe('findStrayedModules()', () => {
       }
     },
     {
+      title: `does not report if the module is used in lib sources
+        and listed in \`peerDependencies\``,
+      modules: [
+        module('lib-a', 'lib'),
+        module('lib-b', 'dev'),
+        module('dev-a', 'dev'),
+        module('per-a', 'lib'),
+        module('per-b', 'dev')
+      ],
+      report: {
+        dep: ['lib-b'],
+        devDep: []
+      }
+    },
+    {
+      title: `does not report if the dev-dependency module is used in
+        lib sources but it is also listed in \`peerDependencies\``,
+      modules: [
+        module('per-b', 'lib')
+      ],
+      report: {
+        dep: [],
+        devDep: []
+      }
+    },
+    {
       title: `reports as strayed dependency if the module is
         used only in dev sources but listed in \`dependencies\``,
       modules: [
@@ -80,6 +107,19 @@ describe('findStrayedModules()', () => {
       report: {
         dep: [],
         devDep: ['dev-a', 'dev-b']
+      }
+    },
+    {
+      title: `reports as strayed dependency if the module is
+        used only in dev sources but listed only in \`peerDependencies\``,
+      modules: [
+        module('lib-a', 'lib'),
+        module('per-a', 'dev'),
+        module('dev-a', 'dev')
+      ],
+      report: {
+        dep: ['per-a'],
+        devDep: []
       }
     }
   ]);
