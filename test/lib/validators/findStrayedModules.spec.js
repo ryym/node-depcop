@@ -1,5 +1,4 @@
-import findStrayedModules from
-  '$lib/codeAnalyzer/validators/findStrayedModules';
+import findStrayedModules from '$lib/validators/findStrayedModules';
 import {
   makePackageJson,
   makeValidatorTester,
@@ -8,7 +7,8 @@ import {
 
 const packageJson = makePackageJson({
   deps: ['lib-a', 'lib-b'],
-  devDeps: ['dev-a', 'dev-b']
+  devDeps: ['dev-a', 'dev-b', 'per-b'],
+  peerDeps: ['per-a', 'per-b']
 });
 
 const testValidator = makeValidatorTester(
@@ -46,8 +46,46 @@ describe('findStrayedModules()', () => {
       }
     },
     {
+      title: `does not report if the module listed in  \`dependencies\` is
+        used in both of lib sources and dev sources`,
+      modules: [
+        module('lib-a', 'lib', 'dev'),
+        module('lib-b', 'lib')
+      ],
+      report: {
+        dep: [],
+        devDep: []
+      }
+    },
+    {
+      title: `does not report if the module is used in lib sources
+        and listed in \`peerDependencies\``,
+      modules: [
+        module('lib-a', 'lib'),
+        module('lib-b', 'dev'),
+        module('dev-a', 'dev'),
+        module('per-a', 'lib'),
+        module('per-b', 'dev')
+      ],
+      report: {
+        dep: ['lib-b'],
+        devDep: []
+      }
+    },
+    {
+      title: `does not report if the dev-dependency module is used in
+        lib sources but it is also listed in \`peerDependencies\``,
+      modules: [
+        module('per-b', 'lib')
+      ],
+      report: {
+        dep: [],
+        devDep: []
+      }
+    },
+    {
       title: `reports as strayed dependency if the module is
-        listed in \`dependencies\``,
+        used only in dev sources but listed in \`dependencies\``,
       modules: [
         module('lib-a', 'div'),
         module('lib-b', 'dev'),
@@ -60,15 +98,28 @@ describe('findStrayedModules()', () => {
     },
     {
       title: `reports as strayed dev-dependency if the module is
-        listed in \`devDependencies\``,
+        used in lib sources but listed in \`devDependencies\``,
       modules: [
         module('lib-a', 'lib'),
         module('dev-a', 'lib'),
-        module('dev-b', 'lib')
+        module('dev-b', 'lib', 'dev')
       ],
       report: {
         dep: [],
         devDep: ['dev-a', 'dev-b']
+      }
+    },
+    {
+      title: `reports as strayed dependency if the module is
+        used only in dev sources but listed only in \`peerDependencies\``,
+      modules: [
+        module('lib-a', 'lib'),
+        module('per-a', 'dev'),
+        module('dev-a', 'dev')
+      ],
+      report: {
+        dep: ['per-a'],
+        devDep: []
       }
     }
   ]);

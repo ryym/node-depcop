@@ -1,7 +1,7 @@
 import assert from 'power-assert';
 import chalk from 'chalk';
 import FileInfo from '$lib/FileInfo';
-import Report from '$lib/codeAnalyzer/Report';
+import Report from '$lib/Report';
 
 /**
  * Create a report using {@link Report} class.

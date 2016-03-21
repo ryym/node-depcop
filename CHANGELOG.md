@@ -1,4 +1,10 @@
-## 0.3.0 (2016-03-15)
+## 0.5.0 (2016-3-21)
+
+* Check export declarations that import a module
+* Check peerDependencies
+* Display warningCount in result
+
+## 0.4.0 (2016-03-15)
 
 * Add option to configure parser
 * Add option to validate either dependencies or devDependencies 

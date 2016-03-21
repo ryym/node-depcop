@@ -1,16 +1,17 @@
 {
   "name": "depcop",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Validate dependencies and devDependencies in package.json",
   "main": "build/index.js",
   "scripts": {
+    "prebuild": "gulp update",
     "build": "gulp build",
     "dev": "gulp",
     "test": "nyc gulp check",
     "test:strict": "nyc gulp check:strict",
     "depcop": "node bin/depcop",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "prepublish": "gulp build",
+    "prepublish": "npm run build",
     "preversion": "npm prune && npm run test && npm run build"
   },
   "keywords": [

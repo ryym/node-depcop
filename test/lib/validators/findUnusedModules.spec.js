@@ -1,18 +1,23 @@
-import findUnusedModules from
-  '$lib/codeAnalyzer/validators/findUnusedModules';
+import findUnusedModules from '$lib/validators/findUnusedModules';
 import {
   makePackageJson,
   makeValidatorTester,
   module
 } from './helper';
 
-const packageJson = makePackageJson({
+const pkgJson = makePackageJson({
   deps: ['lib-a', 'lib-b'],
   devDeps: ['dev-a', 'dev-b']
 });
 
+const pkgJsonWithPeer = makePackageJson({
+  deps: ['lib-a', 'lib-b'],
+  devDeps: ['dev-a', 'dev-b'],
+  peerDeps: ['per-a']
+});
+
 const testValidator = makeValidatorTester(
-  packageJson, findUnusedModules
+  pkgJson, findUnusedModules
 );
 
 /** @test {findUnusedModules} */
@@ -73,6 +78,25 @@ describe('findUnusedModules()', () => {
     }
   ]);
 
+  context('when `peerDependencies` are defined', () => {
+    makeValidatorTester(
+      pkgJsonWithPeer, findUnusedModules
+    )({}, [
+      {
+        title: `does not report if the module listed in \`peerDependencies\`
+          is not used anywhere`,
+        modules: [
+          module('lib-a', 'lib'),
+          module('dev-a', 'dev')
+        ],
+        report: {
+          dep: ['lib-b'],
+          devDep: ['dev-b']
+        }
+      }
+    ]);
+  });
+
   context('with `ignore` option', () => {
     testValidator({
       ignore: ['lib-a', 'dev-b']
@@ -109,7 +133,9 @@ describe('findUnusedModules()', () => {
   });
 
   context('when only `devDependencies` are target', () => {
-    testValidator({
+    makeValidatorTester(
+      pkgJsonWithPeer, findUnusedModules
+    )({
       dependencies: false
     }, [
       {

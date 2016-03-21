@@ -1,7 +1,13 @@
+import path from 'path';
 import gulp from 'gulp';
 import glob from 'glob';
 import Mocha from 'mocha';
 import eslint from 'eslint';
+
+/**
+ * The root directory of this repository.
+ */
+export const ROOT_DIR = path.resolve(__dirname, '../../');
 
 /**
  * Common paths used in tasks.
@@ -21,7 +27,7 @@ export const GLOB = {
   build: `${PATH.build}/**/*`,
   test: `${PATH.test}/**/*.js`,
   spec: `${PATH.test}/**/*.spec.js`,
-  gulp: 'gulpfile/**/*.js'
+  gulp: 'gulpfiles/**/*.js'
 };
 
 /**
@@ -80,44 +86,23 @@ export function runAndWatch(watchPattern, initialValue, task) {
  * Lint the specified files using ESLint.
  * @param {string} pattern
  * @param {Object} options - The options for ESLint.
+ * @param {boolean} disallowWarns - Whether or not
+ *     one or more warnings should throw an error.
  * @return {void}
  */
-export function lintFiles(pattern, options) {
-  const lintOptions = Object.assign({
-    fix: lintFiles.fixEnabled
-  }, options);
-  const linter = new eslint.CLIEngine(lintOptions);
+export function lintFiles(pattern, options, disallowWarns) {
+  const linter = new eslint.CLIEngine(options);
   const formatter = linter.getFormatter();
   const report = linter.executeOnFiles(pattern);
 
   console.log(formatter(report.results));
 
-  if (lintFiles.fixEnabled) {
+  if (options.fix) {
     eslint.CLIEngine.outputFixes(report);
   }
 
-  if (lintFiles.shouldThrow(report)) {
+  const { errorCount, warningCount } = report;
+  if (errorCount > 0 || disallowWarns && warningCount > 0) {
     throw new Error('ESLint reports some problems.');
   }
 }
-
-/**
- * Return true if the lint should fail.
- * @private
- */
-lintFiles.shouldThrow = report => {
-  return report.errorCount > 0
-    || lintFiles.disallowWarns && report.warningCount > 0;
-};
-
-/**
- * If this is true, checks warning count in {@link lintFiles}
- * and throws an error if there is one or more warnings.
- */
-lintFiles.disallowWarns = false;
-
-/**
- * If this is true, make ESLint fix some fixable issues
- * in {@link lintFiles}.
- */
-lintFiles.fixEnabled = false;

@@ -30,7 +30,7 @@ describe('simpleFormatter', () => {
         ]
       },
       output: unindent`
-        Some modules found
+        Some modules found (2)
 
           dependencies
             bar
@@ -38,11 +38,12 @@ describe('simpleFormatter', () => {
             foo
               lib/path/to/foo
 
+        ✖ 2 problems
       `
     }, {
       title: 'several warnings',
       input: {
-        warningCount: 1,
+        warningCount: 20,
         reports: [
           report('Check1', {
             dep: ['c1-lib1', 'c1-lib2'],
@@ -59,7 +60,7 @@ describe('simpleFormatter', () => {
         ]
       },
       output: unindent`
-        Check1
+        Check1 (3)
 
           dependencies
             c1-lib1
@@ -71,7 +72,7 @@ describe('simpleFormatter', () => {
             c1-dev1
               dev/path/to/c1-dev1
 
-        Check2
+        Check2 (4)
 
           dependencies
             c2-lib1
@@ -85,7 +86,7 @@ describe('simpleFormatter', () => {
             c2-dev3
               dev/path/to/c2-dev3
 
-        Check3
+        Check3 (3)
 
           dependencies
             c3-lib1
@@ -95,6 +96,7 @@ describe('simpleFormatter', () => {
             c3-lib3
               lib/path/to/c3-lib3
 
+        ✖ 20 problems
       `
     }]
   );

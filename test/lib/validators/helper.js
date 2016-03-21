@@ -8,12 +8,14 @@ import ImportedModule from '$lib/codeAnalyzer/ImportedModule';
  * has specified dependencies and devDependencies.
  * @param {string[]} deps - The dependency names.
  * @param {string[]} devDeps - The dev dependency names.
+ * @param {string[]} peerDeps - The peer dependency names.
  * @return {PackageJson}
  */
-export function makePackageJson({ deps, devDeps }) {
+export function makePackageJson({ deps, devDeps, peerDeps = [] }) {
   return new PackageJson('path', {
     dependencies: arrayToObj(deps, ''),
-    devDependencies: arrayToObj(devDeps, '')
+    devDependencies: arrayToObj(devDeps, ''),
+    peerDependencies: arrayToObj(peerDeps, '')
   });
 }
 

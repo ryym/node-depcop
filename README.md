@@ -21,12 +21,6 @@ Depcop is a tool to validate your `dependencies` and `devDependencies` in a `pac
 It checks your source code and warns if some dependency definitions are missing,
 unused, or listed in a wrong group.
 
-## Features
-
-* ES2015 style support (`import` declarations)
-* CommonJS style support (`require` expressions)
-* Configurable
-
 ## Validations
 
 ### [Missing module check]
@@ -57,6 +51,12 @@ Makes sure:
 
 For more details about validations, please see [Validations].
 
+## Features
+
+* ES2015 style support (`import` declarations)
+* CommonJS style support (`require` expressions)
+* Configurable
+
 ## Installation
 
 You can install Depcop using npm.
@@ -72,7 +72,7 @@ Please see [Usage] for details.
 
 ```sh
 # CLI
-depcop --missing -l 'lib/**/*.js' -d 'test/**/*.js','gulpfile.js'
+depcop --missing --unused -l 'lib/**/*.js' -d 'test/**/*.js','gulpfile.js'
 ```
 
 ```js
@@ -114,7 +114,8 @@ module.exports = {
   checks: {
     missing: {
       ignore: [/alias.+/]
-    }
+    },
+    unused: {}
   }
 };
 ```
@@ -134,6 +135,7 @@ The goal of this module is to prevent such a tragedy.
 
 * [dependency-check] - A CLI tool to check missing or unused dependencies.
 * [require-lint] - A CLI tool which also supports [CoffeeScript].
+* [eslint-plugin-node] - A ESLint plugin for Node.js. Linting dependencies is one of its features.
 
 [Missing module check]: /docs/validations.md#missing-module-check
 [Unused module check]: /docs/validations.md#unused-module-check
@@ -145,6 +147,8 @@ The goal of this module is to prevent such a tragedy.
 [Node.js API]: /docs/usage.md#nodejs-api
 [Configuring Depcop]: /docs/configuration.md
 
+[eslint-plugin-node]: https://github.com/mysticatea/eslint-plugin-node
 [dependency-check]: https://github.com/maxogden/dependency-check
 [require-lint]: https://github.com/TabDigital/require-lint
+
 [CoffeeScript]: http://coffeescript.org/
