@@ -18,7 +18,7 @@ For configurations of validators, see [configuration](/docs/configuration.md).
 
 This validation warns if there are one or more _missing modules_.
 It is a module which is used somewhere but not listed in
-`dependencies` nor `devDependencies`.
+`dependencies`, `devDependencies` nor `peerDependencies`.
 
 ### Example
 
