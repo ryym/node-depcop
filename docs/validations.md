@@ -17,7 +17,7 @@ For configurations of validators, see [configuration](/docs/configuration.md).
 ## Missing module check
 
 This validation warns if there are one or more _missing modules_.
-It is a module which is used somewhere but not listed in
+A missing module is a module which is used somewhere but not listed in
 `dependencies`, `devDependencies` nor `peerDependencies`.
 
 ### Example
@@ -53,7 +53,7 @@ import App from './components/App';
 ## Unused module check
 
 This validation warns if there are one or more _unsued modules_.
-It is a module which is listed in `dependencies` or `devDependencies`
+An unused module is a module which is listed in `dependencies` or `devDependencies`
 but used in nowhere.
 
 ### Example
@@ -92,7 +92,8 @@ describe('someModule', () => {
 ## Strayed module check
 
 This validation warns if there are one or more _strayed modules_.
-It is a module which is used in a wrong place. There are two patterns of a strayed module:
+A strayed module is a module which is used in a wrong place.
+There are two patterns of a strayed module:
 
 * A module defined in `dependencies` but used only in development code
 * A module defined in `devDependencies` but used in library code
