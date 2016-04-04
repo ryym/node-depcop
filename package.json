@@ -43,7 +43,7 @@
     "chalk": "^1.1.1",
     "espree": "^3.0.2",
     "estraverse": "^4.1.1",
-    "findup-sync": "^0.3.0",
+    "findup-sync": "^0.4.0",
     "glob": "^7.0.0",
     "lodash.assign": "^4.0.6",
     "lodash.flatmap": "^4.2.0",
