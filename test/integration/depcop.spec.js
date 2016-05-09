@@ -90,17 +90,16 @@ describe('depcop', () => {
     const result = _makeDepcop({
       unused: { ignore: ['-somewhere$'] }
     }).runValidations();
-    const pkgPath = path.join(FIXTURES_PATH, 'package.json');
 
     assertReported(result, {
       dependencies: {
         'lib_unused': [
-          at(pkgPath)
+          at('package.json')
         ]
       },
       devDependencies: {
         'dev_unused': [
-          at(pkgPath)
+          at('package.json')
         ]
       }
     });
