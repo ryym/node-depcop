@@ -2,7 +2,7 @@
 
 /** eslint-disable */
 /**
- * A script to make git comit messages more readable
+ * A script to make git commit messages more readable
  * on terminal by replacing emojis with simple words.
  * @example
  *     ./s log -5 --oneline
